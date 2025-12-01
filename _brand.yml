@@ -1,0 +1,72 @@
+meta:
+  name:
+    short: RiskMetrics
+    full: RiskMetrics Analytics
+  link:
+    home: https://www.riskmetrics-analytics.example.com
+
+color:
+  palette:
+    white: "#FFFFFF"
+    black: "#1a1a1a"
+    navy: "#1e3a5f"
+    steel-blue: "#4a7ba7"
+    slate: "#5a6c7d"
+    teal: "#2d7e8f"
+    sage: "#6b8e7f"
+    amber: "#d97706"
+    rust: "#b45309"
+    burgundy: "#8b2635"
+
+  foreground: "#1a1a1a"
+  background: "#FFFFFF"
+  primary: "#1e3a5f"
+  secondary: "#5a6c7d"
+  tertiary: "#b0c4d8"
+  success: "#6b8e7f"
+  info: "#2d7e8f"
+  warning: "#d97706"
+  danger: "#8b2635"
+  light: "#f8f9fa"
+  dark: "#1a1a1a"
+
+typography:
+  fonts:
+    - family: IBM Plex Sans
+      source: google
+      weight: [400, 500, 600, 700]
+      style: [normal, italic]
+    - family: IBM Plex Serif
+      source: google
+      weight: [600, 700]
+      style: [normal]
+    - family: IBM Plex Mono
+      source: google
+      weight: [400, 500]
+      style: [normal]
+
+  base:
+    family: IBM Plex Sans
+    weight: 400
+    size: 16px
+    line-height: 1.6
+
+  headings:
+    family: IBM Plex Serif
+    weight: 600
+    line-height: 1.2
+    color: "#1e3a5f"
+
+  monospace:
+    family: IBM Plex Mono
+    weight: 400
+    size: 0.9em
+
+  monospace-inline:
+    color: "#8b2635"
+    background-color: "#f8f9fa"
+
+  link:
+    weight: 500
+    color: "#2d7e8f"
+    decoration: none
