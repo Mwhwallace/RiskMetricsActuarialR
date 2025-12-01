@@ -11,6 +11,7 @@ library(pins)
 library(bundle)
 library(shinychat)
 library(ellmer)
+library(paws.common)
 
 # ==============================================================================
 # LOAD DATA AND MODEL
@@ -261,6 +262,7 @@ server <- function(input, output, session) {
   # Initialize chat with system prompt about the data
   chat <- ellmer::chat_aws_bedrock(
     model = "us.anthropic.claude-3-5-sonnet-20241022-v2:0",
+    region = "us-east-1",  # Specify your AWS region explicitly
     system_prompt = paste0(
       "You are a helpful actuarial data analyst assistant for RiskMetrics Analytics. ",
       "You have access to two datasets:\n\n",

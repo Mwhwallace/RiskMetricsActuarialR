@@ -9,12 +9,13 @@ validate = true
 files = [
   '/app.R',
   '/renv.lock',
-  '/.posit/publish/RiskMetrics Actuarial Risk-VF6L.toml',
-  '/.posit/publish/deployments/deployment-MNEI.toml',
-  '!/.posit/publish',
+  '/.posit/publish/RiskMetrics Actuarial Risk-TO1K.toml',
+  '/.posit/publish/deployments/deployment-O0NF.toml',
   '/data',
-  '!/data/generate_data.R',
-  '/renv'
+  '/ml',
+  '/_brand.yml',
+  '/api.R',
+  '/.Rprofile'
 ]
 title = 'RiskMetrics Actuarial Risk'
 

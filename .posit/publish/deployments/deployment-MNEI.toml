@@ -11,7 +11,7 @@ id = '320b366b-e984-4bb5-bb22-d9645aad6174'
 dashboard_url = 'https://pub.current.posit.team/connect/#/apps/320b366b-e984-4bb5-bb22-d9645aad6174'
 direct_url = 'https://pub.current.posit.team/content/320b366b-e984-4bb5-bb22-d9645aad6174/'
 logs_url = 'https://pub.current.posit.team/connect/#/apps/320b366b-e984-4bb5-bb22-d9645aad6174/logs'
-deployed_at = '2025-11-25T09:37:01-05:00'
+deployed_at = '2025-12-01T16:46:43-05:00'
 
 [deployment_error]
 code = 'deployFailed'
@@ -33,13 +33,10 @@ files = [
   '/renv.lock',
   '/.posit/publish/RiskMetrics Actuarial Risk-VF6L.toml',
   '/.posit/publish/deployments/deployment-MNEI.toml',
-  '/_brand.yml',
-  '/conversation-export.html',
   '!/.posit/publish',
   '/data',
   '!/data/generate_data.R',
-  '/renv',
-  '/.Rprofile'
+  '/renv'
 ]
 title = 'RiskMetrics Actuarial Risk'
 
