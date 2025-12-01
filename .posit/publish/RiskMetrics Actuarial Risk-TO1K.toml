@@ -14,7 +14,6 @@ files = [
   '/data',
   '/ml',
   '/_brand.yml',
-  '/api.R',
   '/.Rprofile'
 ]
 title = 'RiskMetrics Actuarial Risk'
