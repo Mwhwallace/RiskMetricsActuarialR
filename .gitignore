@@ -1,0 +1,29 @@
+# R specific
+.Rproj.user
+.Rhistory
+.RData
+.Ruserdata
+*.Rproj
+
+# renv
+renv/library/
+renv/staging/
+renv/tmp/
+
+# Data files (keep structure)
+# data/*.csv
+
+# Model artifacts (too large for git)
+ml/*.rds
+ml/*.png
+ml/risk_score_model/
+
+# Shiny
+rsconnect/
+
+# System
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log

@@ -1,0 +1,973 @@
+---
+title: "Comprehensive Actuarial Risk Assessment Analysis"
+subtitle: "Advanced Risk Profiling and Predictive Analytics"
+format:
+  html:
+    theme:
+      - _brand.yml
+    toc: true
+    toc-depth: 3
+    code-fold: true
+    code-summary: "Show code"
+    embed-resources: true
+    fig-width: 10
+    fig-height: 6
+execute:
+  warning: false
+  message: false
+---
+
+# Executive Summary
+
+This analysis examines comprehensive risk profiles for 2,000 individuals across multiple risk dimensions including health, financial, driving behavior, and property characteristics. Using advanced statistical modeling and visualization techniques, we identify key risk factors and develop predictive models for actuarial assessment.
+
+**Key Findings:**
+
+- Health and financial factors are the strongest predictors of overall risk
+- Risk is distributed with most individuals in the Low to Moderate risk categories
+- Age, lifestyle choices, and financial stability significantly impact risk scores
+- Multi-dimensional risk assessment provides more accurate predictions than single-factor models
+
+```{r setup}
+#| include: false
+
+library(tidyverse)
+library(scales)
+library(plotly)
+library(GGally)
+library(patchwork)
+library(gt)
+library(glue)
+
+theme_set(theme_minimal(base_size = 12) +
+          theme(plot.title = element_text(face = "bold", size = 14),
+                plot.subtitle = element_text(size = 11, color = "#5a6c7d"),
+                legend.position = "bottom"))
+
+# Brand colors
+brand_primary <- "#1e3a5f"
+brand_secondary <- "#5a6c7d"
+brand_success <- "#6b8e7f"
+brand_warning <- "#d97706"
+brand_danger <- "#8b2635"
+brand_info <- "#2d7e8f"
+
+risk_colors <- c(
+  "Minimal Risk" = "#6b8e7f",
+  "Low Risk" = brand_info,
+  "Moderate Risk" = brand_warning,
+  "High Risk" = "#b45309",
+  "Very High Risk" = brand_danger
+)
+```
+
+```{r load-data}
+# Load synthetic data
+risk_profiles <- read_csv("data/synthetic-risk-profiles.csv", show_col_types = FALSE)
+claims_history <- read_csv("data/synthetic-claims-history.csv", show_col_types = FALSE)
+risk_summary <- read_csv("data/synthetic-risk-summary.csv", show_col_types = FALSE)
+
+# Convert risk_category to factor with proper ordering
+risk_profiles <- risk_profiles |>
+  mutate(
+    risk_category = factor(
+      risk_category,
+      levels = c("Minimal Risk", "Low Risk", "Moderate Risk", "High Risk", "Very High Risk")
+    )
+  )
+```
+
+# Data Overview
+
+## Dataset Characteristics
+
+```{r data-overview}
+#| echo: false
+
+tibble(
+  Metric = c(
+    "Total Individuals",
+    "Total Claims Records",
+    "Age Range",
+    "Median Annual Income",
+    "Average Credit Score",
+    "Average Overall Risk Score"
+  ),
+  Value = c(
+    comma(nrow(risk_profiles)),
+    comma(nrow(claims_history)),
+    glue("{min(risk_profiles$age)} - {max(risk_profiles$age)} years"),
+    dollar(median(risk_profiles$annual_income)),
+    comma(round(mean(risk_profiles$credit_score))),
+    number(mean(risk_profiles$overall_risk_score), accuracy = 0.1)
+  )
+) |>
+  gt() |>
+  tab_header(
+    title = "Dataset Summary Statistics",
+    subtitle = "Synthetic data for demonstration purposes"
+  ) |>
+  cols_label(
+    Metric = "Metric",
+    Value = "Value"
+  ) |>
+  tab_options(
+    table.font.size = 14
+  )
+```
+
+## Risk Category Distribution
+
+```{r risk-distribution}
+#| fig-cap: "Distribution of individuals across risk categories"
+
+risk_dist <- risk_profiles |>
+  count(risk_category) |>
+  mutate(
+    pct = n / sum(n),
+    label = glue("{comma(n)}\n({percent(pct, accuracy = 0.1)})")
+  )
+
+ggplot(risk_dist, aes(x = risk_category, y = n, fill = risk_category)) +
+  geom_col(alpha = 0.9) +
+  geom_text(aes(label = label), vjust = -0.5, size = 3.5, fontface = "bold") +
+  scale_fill_manual(values = risk_colors) +
+  scale_y_continuous(labels = comma, expand = expansion(mult = c(0, 0.1))) +
+  labs(
+    title = "Risk Category Distribution",
+    subtitle = "Most individuals fall into Low to Moderate risk categories",
+    x = NULL,
+    y = "Number of Individuals"
+  ) +
+  theme(legend.position = "none")
+```
+
+# Demographic Analysis
+
+## Age and Gender Distribution
+
+```{r demographics}
+#| fig-cap: "Age distribution by gender and risk category"
+
+# Age distribution by gender
+p1 <- ggplot(risk_profiles, aes(x = age, fill = gender)) +
+  geom_histogram(bins = 30, alpha = 0.7, position = "identity") +
+  scale_fill_manual(values = c("Male" = brand_primary, "Female" = brand_info, "Non-Binary" = brand_success)) +
+  labs(
+    title = "Age Distribution by Gender",
+    x = "Age (years)",
+    y = "Count",
+    fill = "Gender"
+  )
+
+# Age by risk category
+p2 <- ggplot(risk_profiles, aes(x = risk_category, y = age, fill = risk_category)) +
+  geom_violin(alpha = 0.7) +
+  geom_boxplot(width = 0.2, alpha = 0.3, outlier.alpha = 0.3) +
+  scale_fill_manual(values = risk_colors) +
+  labs(
+    title = "Age Distribution by Risk Category",
+    x = "Risk Category",
+    y = "Age (years)"
+  ) +
+  theme(legend.position = "none")
+
+p1 / p2
+```
+
+## Geographic and Occupational Patterns
+
+```{r geo-occupation}
+#| fig-cap: "Risk patterns by geography and occupation"
+
+# Risk by region
+p1 <- risk_profiles |>
+  count(geographic_region, risk_category) |>
+  group_by(geographic_region) |>
+  mutate(pct = n / sum(n)) |>
+  ungroup() |>
+  ggplot(aes(x = geographic_region, y = pct, fill = risk_category)) +
+  geom_col(position = "fill") +
+  scale_fill_manual(values = risk_colors) +
+  scale_y_continuous(labels = percent) +
+  labs(
+    title = "Risk Distribution by Geographic Region",
+    x = "Region",
+    y = "Percentage",
+    fill = "Risk Category"
+  ) +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+# Average risk by occupation
+p2 <- risk_profiles |>
+  group_by(occupation_category) |>
+  summarise(
+    avg_risk = mean(overall_risk_score),
+    n = n(),
+    .groups = "drop"
+  ) |>
+  arrange(desc(avg_risk)) |>
+  ggplot(aes(x = reorder(occupation_category, avg_risk), y = avg_risk)) +
+  geom_col(fill = brand_primary, alpha = 0.8) +
+  geom_text(aes(label = comma(n)), hjust = -0.2, size = 3) +
+  coord_flip() +
+  labs(
+    title = "Average Risk Score by Occupation",
+    subtitle = "Numbers indicate sample size",
+    x = "Occupation Category",
+    y = "Average Overall Risk Score"
+  )
+
+p1 / p2
+```
+
+# Health Risk Analysis
+
+## Health Metrics Overview
+
+```{r health-metrics}
+#| fig-cap: "Distribution of key health indicators"
+
+# BMI distribution with risk overlay
+p1 <- ggplot(risk_profiles, aes(x = bmi, fill = risk_category)) +
+  geom_histogram(bins = 40, alpha = 0.8) +
+  geom_vline(xintercept = c(18.5, 25, 30), linetype = "dashed", color = "gray30") +
+  annotate("text", x = c(18.5, 25, 30), y = Inf,
+           label = c("Underweight", "Overweight", "Obese"),
+           vjust = 1.5, size = 3, color = "gray30") +
+  scale_fill_manual(values = risk_colors) +
+  labs(
+    title = "BMI Distribution with Risk Categories",
+    x = "Body Mass Index",
+    y = "Count",
+    fill = "Risk Category"
+  )
+
+# Blood pressure vs age
+p2 <- risk_profiles |>
+  ggplot(aes(x = age, y = systolic_bp, color = risk_category)) +
+  geom_point(alpha = 0.4, size = 1.5) +
+  geom_smooth(method = "loess", se = TRUE, color = brand_danger, linewidth = 1.2) +
+  geom_hline(yintercept = 140, linetype = "dashed", color = brand_danger) +
+  annotate("text", x = min(risk_profiles$age), y = 145,
+           label = "Hypertension threshold", hjust = 0, color = brand_danger, size = 3) +
+  scale_color_manual(values = risk_colors) +
+  labs(
+    title = "Blood Pressure vs Age",
+    subtitle = "Showing progression and hypertension risk",
+    x = "Age (years)",
+    y = "Systolic Blood Pressure (mmHg)",
+    color = "Risk Category"
+  )
+
+p1 / p2
+```
+
+## Medical Conditions Impact
+
+```{r health-conditions}
+#| fig-cap: "Impact of medical conditions on risk scores"
+
+conditions_data <- risk_profiles |>
+  pivot_longer(
+    cols = c(diabetes, hypertension, heart_disease),
+    names_to = "condition",
+    values_to = "has_condition"
+  ) |>
+  filter(has_condition == 1) |>
+  mutate(
+    condition = case_when(
+      condition == "diabetes" ~ "Diabetes",
+      condition == "hypertension" ~ "Hypertension",
+      condition == "heart_disease" ~ "Heart Disease",
+      TRUE ~ condition
+    )
+  )
+
+# Prevalence by age group
+p1 <- conditions_data |>
+  mutate(age_group = cut(age, breaks = c(0, 30, 40, 50, 60, 100),
+                         labels = c("<30", "30-39", "40-49", "50-59", "60+"))) |>
+  count(age_group, condition) |>
+  group_by(age_group) |>
+  mutate(total = sum(n)) |>
+  ungroup() |>
+  ggplot(aes(x = age_group, y = n, fill = condition)) +
+  geom_col(position = "dodge", alpha = 0.8) +
+  scale_fill_manual(values = c("Diabetes" = brand_warning,
+                               "Hypertension" = brand_danger,
+                               "Heart Disease" = "#5a0a0a")) +
+  labs(
+    title = "Medical Condition Prevalence by Age Group",
+    x = "Age Group",
+    y = "Number of Cases",
+    fill = "Condition"
+  )
+
+# Risk score comparison
+p2 <- risk_profiles |>
+  mutate(
+    health_status = case_when(
+      diabetes == 1 | hypertension == 1 | heart_disease == 1 ~ "Has Condition",
+      TRUE ~ "No Conditions"
+    )
+  ) |>
+  ggplot(aes(x = health_status, y = health_risk_score, fill = health_status)) +
+  geom_violin(alpha = 0.7) +
+  geom_boxplot(width = 0.2, alpha = 0.5) +
+  scale_fill_manual(values = c("Has Condition" = brand_danger, "No Conditions" = brand_success)) +
+  labs(
+    title = "Health Risk Score by Medical Status",
+    x = NULL,
+    y = "Health Risk Score"
+  ) +
+  theme(legend.position = "none")
+
+p1 / p2
+```
+
+## Lifestyle Factors
+
+```{r lifestyle}
+#| fig-cap: "Impact of lifestyle choices on health risk"
+
+# Smoking status impact
+p1 <- risk_profiles |>
+  ggplot(aes(x = smoking_status, y = health_risk_score, fill = smoking_status)) +
+  geom_violin(alpha = 0.7) +
+  geom_boxplot(width = 0.3, alpha = 0.5, outlier.alpha = 0.3) +
+  scale_fill_manual(values = c("Never" = brand_success, "Former" = brand_warning, "Current" = brand_danger)) +
+  labs(
+    title = "Health Risk by Smoking Status",
+    x = "Smoking Status",
+    y = "Health Risk Score"
+  ) +
+  theme(legend.position = "none")
+
+# Exercise vs alcohol
+p2 <- risk_profiles |>
+  group_by(exercise_frequency, alcohol_consumption) |>
+  summarise(
+    avg_health_risk = mean(health_risk_score),
+    n = n(),
+    .groups = "drop"
+  ) |>
+  ggplot(aes(x = exercise_frequency, y = alcohol_consumption, fill = avg_health_risk)) +
+  geom_tile(color = "white", linewidth = 1) +
+  geom_text(aes(label = round(avg_health_risk, 1)), color = "white", fontface = "bold") +
+  scale_fill_gradient2(
+    low = brand_success, mid = brand_warning, high = brand_danger,
+    midpoint = 50
+  ) +
+  labs(
+    title = "Average Health Risk: Exercise vs Alcohol",
+    subtitle = "Heatmap showing combined lifestyle effects",
+    x = "Exercise Frequency",
+    y = "Alcohol Consumption",
+    fill = "Avg Health\nRisk Score"
+  ) +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+p1 + p2
+```
+
+# Financial Risk Analysis
+
+## Credit and Income Patterns
+
+```{r financial-overview}
+#| fig-cap: "Financial health indicators"
+
+# Credit score distribution
+p1 <- ggplot(risk_profiles, aes(x = credit_score, fill = risk_category)) +
+  geom_histogram(bins = 40, alpha = 0.8) +
+  geom_vline(xintercept = c(580, 670, 740, 800), linetype = "dashed", color = "gray30") +
+  scale_fill_manual(values = risk_colors) +
+  labs(
+    title = "Credit Score Distribution",
+    subtitle = "Vertical lines indicate credit tier boundaries",
+    x = "Credit Score",
+    y = "Count",
+    fill = "Risk Category"
+  )
+
+# Income vs DTI ratio
+p2 <- risk_profiles |>
+  filter(dti_ratio < 1.5) |>  # Filter extreme outliers for visualization
+  ggplot(aes(x = annual_income, y = dti_ratio, color = financial_risk_score)) +
+  geom_point(alpha = 0.5, size = 1.5) +
+  geom_smooth(method = "loess", se = TRUE, color = brand_primary, linewidth = 1.2) +
+  scale_x_continuous(labels = dollar_format(scale = 1/1000, suffix = "K")) +
+  scale_color_gradient2(
+    low = brand_success, mid = brand_warning, high = brand_danger,
+    midpoint = 50
+  ) +
+  labs(
+    title = "Debt-to-Income Ratio vs Annual Income",
+    x = "Annual Income",
+    y = "Debt-to-Income Ratio",
+    color = "Financial\nRisk Score"
+  )
+
+p1 / p2
+```
+
+## Debt Analysis
+
+```{r debt-analysis}
+#| fig-cap: "Debt composition and impact analysis"
+
+# Debt composition by risk category
+debt_composition <- risk_profiles |>
+  select(risk_category, mortgage_debt, auto_loan_balance, credit_card_debt) |>
+  pivot_longer(cols = -risk_category, names_to = "debt_type", values_to = "amount") |>
+  group_by(risk_category, debt_type) |>
+  summarise(avg_debt = mean(amount), .groups = "drop") |>
+  mutate(
+    debt_type = case_when(
+      debt_type == "mortgage_debt" ~ "Mortgage",
+      debt_type == "auto_loan_balance" ~ "Auto Loan",
+      debt_type == "credit_card_debt" ~ "Credit Card",
+      TRUE ~ debt_type
+    )
+  )
+
+ggplot(debt_composition, aes(x = risk_category, y = avg_debt, fill = debt_type)) +
+  geom_col(position = "dodge", alpha = 0.8) +
+  scale_y_continuous(labels = dollar_format()) +
+  scale_fill_manual(values = c("Mortgage" = brand_primary, "Auto Loan" = brand_info, "Credit Card" = brand_warning)) +
+  labs(
+    title = "Average Debt Composition by Risk Category",
+    subtitle = "Breakdown of different debt types",
+    x = "Risk Category",
+    y = "Average Debt Amount",
+    fill = "Debt Type"
+  ) +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+```
+
+## Assets and Savings
+
+```{r assets}
+#| fig-cap: "Asset accumulation patterns"
+
+# Assets by age and risk
+asset_data <- risk_profiles |>
+  mutate(
+    age_group = cut(age, breaks = seq(20, 90, 10), labels = paste0(seq(20, 80, 10), "s")),
+    total_assets = liquid_assets + retirement_savings + home_value
+  ) |>
+  filter(!is.na(age_group))
+
+p1 <- asset_data |>
+  group_by(age_group, risk_category) |>
+  summarise(avg_assets = mean(total_assets), .groups = "drop") |>
+  ggplot(aes(x = age_group, y = avg_assets, color = risk_category, group = risk_category)) +
+  geom_line(linewidth = 1.2, alpha = 0.8) +
+  geom_point(size = 3) +
+  scale_y_continuous(labels = dollar_format(scale = 1/1000, suffix = "K")) +
+  scale_color_manual(values = risk_colors) +
+  labs(
+    title = "Total Assets by Age and Risk Category",
+    x = "Age Group",
+    y = "Average Total Assets",
+    color = "Risk Category"
+  )
+
+# Asset allocation
+p2 <- risk_profiles |>
+  select(risk_category, liquid_assets, retirement_savings, home_value) |>
+  pivot_longer(cols = -risk_category, names_to = "asset_type", values_to = "amount") |>
+  group_by(risk_category, asset_type) |>
+  summarise(avg_amount = mean(amount), .groups = "drop") |>
+  group_by(risk_category) |>
+  mutate(pct = avg_amount / sum(avg_amount)) |>
+  ungroup() |>
+  mutate(
+    asset_type = case_when(
+      asset_type == "liquid_assets" ~ "Liquid Assets",
+      asset_type == "retirement_savings" ~ "Retirement",
+      asset_type == "home_value" ~ "Home Equity",
+      TRUE ~ asset_type
+    )
+  ) |>
+  ggplot(aes(x = risk_category, y = pct, fill = asset_type)) +
+  geom_col(position = "fill", alpha = 0.8) +
+  scale_y_continuous(labels = percent) +
+  scale_fill_manual(values = c("Liquid Assets" = brand_info, "Retirement" = brand_primary, "Home Equity" = brand_success)) +
+  labs(
+    title = "Asset Allocation by Risk Category",
+    x = "Risk Category",
+    y = "Percentage of Total Assets",
+    fill = "Asset Type"
+  ) +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+p1 / p2
+```
+
+# Driving and Behavioral Risk
+
+## Driving Record Analysis
+
+```{r driving-risk}
+#| fig-cap: "Driving behavior and incident analysis"
+
+# Accidents and tickets by age
+p1 <- risk_profiles |>
+  mutate(age_group = cut(age, breaks = seq(15, 95, 10), labels = paste0(seq(20, 90, 10), "s"))) |>
+  filter(!is.na(age_group)) |>
+  select(age_group, accidents_5yr, tickets_5yr) |>
+  pivot_longer(cols = -age_group, names_to = "incident_type", values_to = "count") |>
+  group_by(age_group, incident_type) |>
+  summarise(avg_incidents = mean(count), .groups = "drop") |>
+  mutate(
+    incident_type = if_else(incident_type == "accidents_5yr", "Accidents", "Tickets")
+  ) |>
+  ggplot(aes(x = age_group, y = avg_incidents, fill = incident_type)) +
+  geom_col(position = "dodge", alpha = 0.8) +
+  scale_fill_manual(values = c("Accidents" = brand_danger, "Tickets" = brand_warning)) +
+  labs(
+    title = "Average Driving Incidents by Age Group",
+    subtitle = "5-year history",
+    x = "Age Group",
+    y = "Average Incidents",
+    fill = "Incident Type"
+  )
+
+# Miles driven vs incidents
+p2 <- risk_profiles |>
+  mutate(total_incidents = accidents_5yr + tickets_5yr) |>
+  filter(total_incidents > 0) |>
+  ggplot(aes(x = miles_driven_annual, y = total_incidents, color = urban_rural)) +
+  geom_point(alpha = 0.4, size = 1.5) +
+  geom_smooth(method = "lm", se = TRUE, linewidth = 1.2) +
+  scale_x_continuous(labels = comma) +
+  scale_color_manual(values = c("Urban" = brand_primary, "Suburban" = brand_info, "Rural" = brand_success)) +
+  labs(
+    title = "Annual Mileage vs Total Incidents",
+    subtitle = "By residential area type",
+    x = "Annual Miles Driven",
+    y = "Total Incidents (5 years)",
+    color = "Area Type"
+  )
+
+p1 / p2
+```
+
+## Risk Behavior Indicators
+
+```{r behavior-indicators}
+#| fig-cap: "High-risk behavior prevalence and impact"
+
+# High-risk behaviors
+risk_behaviors <- risk_profiles |>
+  select(risk_category, extreme_sports, hazardous_hobby, dui_history) |>
+  pivot_longer(cols = -risk_category, names_to = "behavior", values_to = "has_behavior") |>
+  filter(has_behavior == 1) |>
+  mutate(
+    behavior = case_when(
+      behavior == "extreme_sports" ~ "Extreme Sports",
+      behavior == "hazardous_hobby" ~ "Hazardous Hobbies",
+      behavior == "dui_history" ~ "DUI History",
+      TRUE ~ behavior
+    )
+  ) |>
+  count(risk_category, behavior)
+
+ggplot(risk_behaviors, aes(x = risk_category, y = n, fill = behavior)) +
+  geom_col(position = "dodge", alpha = 0.8) +
+  geom_text(aes(label = n), position = position_dodge(width = 0.9), vjust = -0.5, size = 3) +
+  scale_fill_manual(values = c("Extreme Sports" = brand_info, "Hazardous Hobbies" = brand_warning, "DUI History" = brand_danger)) +
+  labs(
+    title = "High-Risk Behavior Prevalence by Risk Category",
+    subtitle = "Count of individuals engaged in risky activities",
+    x = "Risk Category",
+    y = "Count",
+    fill = "Behavior Type"
+  ) +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+```
+
+# Property Risk Assessment
+
+## Property Characteristics
+
+```{r property-characteristics}
+#| fig-cap: "Property-related risk factors"
+
+property_owners <- risk_profiles |>
+  filter(home_value > 0)
+
+# Home age vs property risk
+p1 <- ggplot(property_owners, aes(x = home_age_years, y = property_risk_score, color = construction_type)) +
+  geom_point(alpha = 0.5, size = 1.5) +
+  geom_smooth(method = "loess", se = TRUE, color = brand_primary, linewidth = 1.2) +
+  scale_color_manual(values = c("Wood Frame" = brand_warning, "Brick" = brand_primary,
+                                "Concrete" = brand_success, "Mixed" = brand_info)) +
+  labs(
+    title = "Property Risk vs Home Age",
+    subtitle = "By construction type",
+    x = "Home Age (years)",
+    y = "Property Risk Score",
+    color = "Construction"
+  )
+
+# Environmental risk factors
+p2 <- property_owners |>
+  select(flood_zone, earthquake_zone, wildfire_risk, crime_rate_area, property_risk_score) |>
+  pivot_longer(cols = -property_risk_score, names_to = "risk_factor", values_to = "level") |>
+  mutate(
+    risk_factor = case_when(
+      risk_factor == "flood_zone" ~ "Flood",
+      risk_factor == "earthquake_zone" ~ "Earthquake",
+      risk_factor == "wildfire_risk" ~ "Wildfire",
+      risk_factor == "crime_rate_area" ~ "Crime",
+      TRUE ~ risk_factor
+    )
+  ) |>
+  group_by(risk_factor, level) |>
+  summarise(avg_risk = mean(property_risk_score), .groups = "drop") |>
+  ggplot(aes(x = level, y = avg_risk, fill = risk_factor)) +
+  geom_col(position = "dodge", alpha = 0.8) +
+  scale_fill_manual(values = c("Flood" = "#2563eb", "Earthquake" = "#78350f",
+                               "Wildfire" = brand_danger, "Crime" = brand_warning)) +
+  labs(
+    title = "Environmental Risk Factor Impact",
+    subtitle = "Average property risk score",
+    x = "Risk Level",
+    y = "Avg Property Risk Score",
+    fill = "Risk Factor"
+  )
+
+p1 / p2
+```
+
+# Multi-Dimensional Risk Analysis
+
+## Risk Score Correlations
+
+```{r risk-correlations}
+#| fig-cap: "Correlation matrix of risk dimensions"
+#| fig-width: 10
+#| fig-height: 8
+
+risk_scores <- risk_profiles |>
+  select(
+    Health = health_risk_score,
+    Financial = financial_risk_score,
+    Driving = driving_risk_score,
+    Property = property_risk_score,
+    Overall = overall_risk_score,
+    Age = age,
+    Income = annual_income,
+    `Credit Score` = credit_score
+  )
+
+ggpairs(
+  risk_scores,
+  upper = list(continuous = wrap("cor", size = 3, color = brand_primary)),
+  lower = list(continuous = wrap("points", alpha = 0.3, size = 0.5, color = brand_info)),
+  diag = list(continuous = wrap("barDiag", fill = brand_primary, alpha = 0.7)),
+  progress = FALSE
+) +
+  theme_minimal() +
+  theme(
+    strip.text = element_text(size = 8, face = "bold"),
+    axis.text = element_text(size = 6)
+  )
+```
+
+## Composite Risk Patterns
+
+```{r composite-risk}
+#| fig-cap: "Multi-dimensional risk profile visualization"
+
+# Radar chart data for average risk by category
+risk_radar <- risk_profiles |>
+  group_by(risk_category) |>
+  summarise(
+    Health = mean(health_risk_score),
+    Financial = mean(financial_risk_score),
+    Driving = mean(driving_risk_score),
+    Property = mean(property_risk_score),
+    .groups = "drop"
+  )
+
+# Scatter plot of primary risk dimensions
+ggplot(risk_profiles, aes(x = health_risk_score, y = financial_risk_score,
+                          color = risk_category, size = overall_risk_score)) +
+  geom_point(alpha = 0.5) +
+  scale_color_manual(values = risk_colors) +
+  scale_size_continuous(range = c(1, 4)) +
+  labs(
+    title = "Health vs Financial Risk Dimensions",
+    subtitle = "Size indicates overall risk score",
+    x = "Health Risk Score",
+    y = "Financial Risk Score",
+    color = "Risk Category",
+    size = "Overall Risk"
+  )
+```
+
+## Risk Score Distribution Analysis
+
+```{r risk-distributions}
+#| fig-cap: "Distribution of individual risk dimension scores"
+
+risk_profiles |>
+  select(
+    Health = health_risk_score,
+    Financial = financial_risk_score,
+    Driving = driving_risk_score,
+    Property = property_risk_score
+  ) |>
+  pivot_longer(cols = everything(), names_to = "risk_dimension", values_to = "score") |>
+  ggplot(aes(x = score, fill = risk_dimension)) +
+  geom_density(alpha = 0.6) +
+  scale_fill_manual(values = c("Health" = brand_danger, "Financial" = brand_warning,
+                                "Driving" = brand_info, "Property" = brand_success)) +
+  labs(
+    title = "Risk Score Distributions by Dimension",
+    subtitle = "Density plots showing score concentration",
+    x = "Risk Score",
+    y = "Density",
+    fill = "Risk Dimension"
+  )
+```
+
+# Claims Analysis
+
+## Claims Frequency and Severity
+
+```{r claims-overview}
+#| fig-cap: "Claims patterns and trends"
+
+# Claims by type and status
+p1 <- claims_history |>
+  count(claim_type, claim_status) |>
+  ggplot(aes(x = claim_type, y = n, fill = claim_status)) +
+  geom_col(position = "dodge", alpha = 0.8) +
+  geom_text(aes(label = n), position = position_dodge(width = 0.9), vjust = -0.5, size = 3) +
+  scale_fill_manual(values = c("Paid" = brand_success, "Denied" = brand_danger, "Pending" = brand_warning)) +
+  labs(
+    title = "Claims Distribution by Type and Status",
+    x = "Claim Type",
+    y = "Number of Claims",
+    fill = "Status"
+  )
+
+# Average claim amount by type
+p2 <- claims_history |>
+  filter(claim_status == "Paid") |>
+  group_by(claim_type) |>
+  summarise(
+    avg_amount = mean(claim_amount),
+    median_amount = median(claim_amount),
+    n = n(),
+    .groups = "drop"
+  ) |>
+  ggplot(aes(x = reorder(claim_type, avg_amount), y = avg_amount)) +
+  geom_col(fill = brand_primary, alpha = 0.8) +
+  geom_point(aes(y = median_amount), color = brand_danger, size = 3) +
+  geom_text(aes(label = dollar(avg_amount)), hjust = -0.1, size = 3) +
+  scale_y_continuous(labels = dollar_format()) +
+  coord_flip() +
+  labs(
+    title = "Average Paid Claim Amount by Type",
+    subtitle = "Red dot shows median (avg shown as label)",
+    x = "Claim Type",
+    y = "Amount"
+  )
+
+p1 / p2
+```
+
+## Claims vs Risk Scores
+
+```{r claims-risk-relationship}
+#| fig-cap: "Relationship between risk scores and claims activity"
+
+# Join claims with risk profiles
+claims_per_individual <- claims_history |>
+  group_by(individual_id) |>
+  summarise(
+    num_claims = n(),
+    total_claimed = sum(claim_amount),
+    .groups = "drop"
+  )
+
+risk_with_claims <- risk_profiles |>
+  left_join(claims_per_individual, by = "individual_id") |>
+  mutate(
+    num_claims = replace_na(num_claims, 0),
+    total_claimed = replace_na(total_claimed, 0),
+    has_claims = num_claims > 0
+  )
+
+# Claims frequency by risk category
+p1 <- risk_with_claims |>
+  group_by(risk_category) |>
+  summarise(
+    avg_claims = mean(num_claims),
+    pct_with_claims = mean(has_claims),
+    .groups = "drop"
+  ) |>
+  ggplot(aes(x = risk_category, y = avg_claims, fill = risk_category)) +
+  geom_col(alpha = 0.8) +
+  geom_text(aes(label = number(avg_claims, accuracy = 0.01)), vjust = -0.5, fontface = "bold") +
+  scale_fill_manual(values = risk_colors) +
+  labs(
+    title = "Average Number of Claims by Risk Category",
+    x = "Risk Category",
+    y = "Average Claims per Individual"
+  ) +
+  theme(legend.position = "none", axis.text.x = element_text(angle = 45, hjust = 1))
+
+# Risk score vs claims amount
+p2 <- risk_with_claims |>
+  filter(has_claims) |>
+  ggplot(aes(x = overall_risk_score, y = total_claimed, color = risk_category)) +
+  geom_point(alpha = 0.5, size = 2) +
+  geom_smooth(method = "lm", se = TRUE, color = brand_primary, linewidth = 1.2) +
+  scale_y_continuous(labels = dollar_format()) +
+  scale_color_manual(values = risk_colors) +
+  labs(
+    title = "Total Claims Amount vs Overall Risk Score",
+    subtitle = "For individuals with claims history",
+    x = "Overall Risk Score",
+    y = "Total Claimed Amount",
+    color = "Risk Category"
+  )
+
+p1 + p2
+```
+
+# Key Risk Factors
+
+## Top Risk Predictors
+
+```{r risk-predictors}
+#| fig-cap: "Most influential factors for overall risk"
+
+# Calculate correlations with overall risk
+risk_correlations <- risk_profiles |>
+  select(
+    overall_risk_score,
+    age, bmi, systolic_bp, cholesterol_ldl,
+    credit_score, dti_ratio, num_late_payments_2yr,
+    accidents_5yr, tickets_5yr, miles_driven_annual,
+    doctor_visits_annual, hospitalizations_5yr
+  ) |>
+  cor(use = "complete.obs") |>
+  as.data.frame() |>
+  rownames_to_column("variable") |>
+  select(variable, correlation = overall_risk_score) |>
+  filter(variable != "overall_risk_score") |>
+  mutate(
+    abs_corr = abs(correlation),
+    variable_label = case_when(
+      variable == "num_late_payments_2yr" ~ "Late Payments",
+      variable == "dti_ratio" ~ "Debt-to-Income Ratio",
+      variable == "credit_score" ~ "Credit Score",
+      variable == "hospitalizations_5yr" ~ "Hospitalizations",
+      variable == "accidents_5yr" ~ "Accidents",
+      variable == "tickets_5yr" ~ "Traffic Tickets",
+      variable == "systolic_bp" ~ "Blood Pressure",
+      variable == "cholesterol_ldl" ~ "Cholesterol",
+      variable == "doctor_visits_annual" ~ "Doctor Visits",
+      variable == "miles_driven_annual" ~ "Annual Mileage",
+      TRUE ~ str_to_title(str_replace_all(variable, "_", " "))
+    )
+  ) |>
+  arrange(desc(abs_corr)) |>
+  slice_head(n = 12)
+
+ggplot(risk_correlations, aes(x = reorder(variable_label, abs_corr), y = correlation,
+                               fill = correlation > 0)) +
+  geom_col(alpha = 0.8) +
+  geom_text(aes(label = number(correlation, accuracy = 0.001)),
+            hjust = if_else(risk_correlations$correlation > 0, -0.1, 1.1), size = 3) +
+  scale_fill_manual(values = c("TRUE" = brand_danger, "FALSE" = brand_success), guide = "none") +
+  coord_flip() +
+  labs(
+    title = "Top Risk Factor Correlations with Overall Risk Score",
+    subtitle = "Positive correlations increase risk, negative correlations decrease risk",
+    x = NULL,
+    y = "Correlation with Overall Risk Score"
+  )
+```
+
+# Conclusions and Recommendations
+
+## Summary of Findings
+
+```{r key-findings}
+#| echo: false
+
+findings <- tibble(
+  Category = c("Demographics", "Health", "Financial", "Behavioral", "Property"),
+  `Key Insight` = c(
+    "Age 40-60 has highest concentration of moderate to high risk individuals",
+    "Smoking, BMI, and chronic conditions are primary health risk drivers",
+    "Credit score and debt-to-income ratio strongly predict financial risk",
+    "Past driving incidents significantly increase future risk probability",
+    "Environmental factors and property age are key property risk indicators"
+  ),
+  Recommendation = c(
+    "Age-adjusted premium structures with lifestyle incentives",
+    "Health screening programs and wellness initiatives for high-risk groups",
+    "Credit monitoring and financial literacy programs for improvement",
+    "Safe driving courses and telematics-based insurance options",
+    "Property inspection requirements and mitigation incentives"
+  )
+)
+
+findings |>
+  gt() |>
+  tab_header(
+    title = "Key Findings and Recommendations",
+    subtitle = "Actionable insights from risk assessment analysis"
+  ) |>
+  cols_width(
+    Category ~ px(100),
+    `Key Insight` ~ px(250),
+    Recommendation ~ px(250)
+  ) |>
+  tab_options(
+    table.font.size = 12,
+    row.striping.include_table_body = TRUE
+  ) |>
+  tab_style(
+    style = cell_text(weight = "bold"),
+    locations = cells_column_labels()
+  )
+```
+
+## Risk Segmentation Strategy
+
+Based on this comprehensive analysis, we recommend a **four-tier risk management approach**:
+
+1. **Minimal/Low Risk (45% of population)**
+   - Standard coverage with competitive rates
+   - Loyalty rewards and preventive care incentives
+   - Focus on retention and upselling
+
+2. **Moderate Risk (50% of population)**
+   - Tailored coverage with risk-based pricing
+   - Active risk reduction programs
+   - Regular monitoring and engagement
+
+3. **High Risk (5% of population)**
+   - Specialized underwriting and coverage limits
+   - Mandatory risk mitigation requirements
+   - Intensive case management
+
+4. **Very High Risk (<1% of population)**
+   - Individual assessment required
+   - Possible coverage restrictions
+   - Alternative risk transfer solutions
+
+---
+
+**Note:** This analysis uses synthetic data generated for demonstration purposes. All findings are illustrative of analytical capabilities and should not be used for actual underwriting decisions.

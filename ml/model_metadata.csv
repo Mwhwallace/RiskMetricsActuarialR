@@ -1,0 +1,9 @@
+name,value
+model_type,Linear Regression
+train_date,1763736381.96964
+n_train,1500
+n_test,500
+n_features,38
+test_rmse,1.99866018426228
+test_rsq,0.971074230524018
+test_mae,1.53005405745689
