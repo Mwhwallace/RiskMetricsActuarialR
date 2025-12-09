@@ -1,6 +1,7 @@
 ---
 title: "Comprehensive Actuarial Risk Assessment Analysis"
 subtitle: "Advanced Risk Profiling and Predictive Analytics"
+author: "Matt Wallace from Posit PBC"
 format:
   html:
     theme:
@@ -23,10 +24,10 @@ This analysis examines comprehensive risk profiles for 2,000 individuals across 
 
 **Key Findings:**
 
-- Health and financial factors are the strongest predictors of overall risk
-- Risk is distributed with most individuals in the Low to Moderate risk categories
-- Age, lifestyle choices, and financial stability significantly impact risk scores
-- Multi-dimensional risk assessment provides more accurate predictions than single-factor models
+-   Health and financial factors are the strongest predictors of overall risk
+-   Risk is distributed with most individuals in the Low to Moderate risk categories
+-   Age, lifestyle choices, and financial stability significantly impact risk scores
+-   Multi-dimensional risk assessment provides more accurate predictions than single-factor models
 
 ```{r setup}
 #| include: false
@@ -948,26 +949,23 @@ findings |>
 
 Based on this comprehensive analysis, we recommend a **four-tier risk management approach**:
 
-1. **Minimal/Low Risk (45% of population)**
-   - Standard coverage with competitive rates
-   - Loyalty rewards and preventive care incentives
-   - Focus on retention and upselling
+1.  **Minimal/Low Risk (45% of population)**
+    -   Standard coverage with competitive rates
+    -   Loyalty rewards and preventive care incentives
+    -   Focus on retention and upselling
+2.  **Moderate Risk (50% of population)**
+    -   Tailored coverage with risk-based pricing
+    -   Active risk reduction programs
+    -   Regular monitoring and engagement
+3.  **High Risk (5% of population)**
+    -   Specialized underwriting and coverage limits
+    -   Mandatory risk mitigation requirements
+    -   Intensive case management
+4.  **Very High Risk (\<1% of population)**
+    -   Individual assessment required
+    -   Possible coverage restrictions
+    -   Alternative risk transfer solutions
 
-2. **Moderate Risk (50% of population)**
-   - Tailored coverage with risk-based pricing
-   - Active risk reduction programs
-   - Regular monitoring and engagement
-
-3. **High Risk (5% of population)**
-   - Specialized underwriting and coverage limits
-   - Mandatory risk mitigation requirements
-   - Intensive case management
-
-4. **Very High Risk (<1% of population)**
-   - Individual assessment required
-   - Possible coverage restrictions
-   - Alternative risk transfer solutions
-
----
+------------------------------------------------------------------------
 
 **Note:** This analysis uses synthetic data generated for demonstration purposes. All findings are illustrative of analytical capabilities and should not be used for actual underwriting decisions.

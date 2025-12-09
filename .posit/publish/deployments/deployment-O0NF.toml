@@ -2,7 +2,7 @@
 '$schema' = 'https://cdn.posit.co/publisher/schemas/posit-publishing-record-schema-v3.json'
 server_type = 'connect'
 server_url = 'https://pub.current.posit.team'
-client_version = '1.27.0'
+client_version = '1.26.0'
 created_at = ''
 dismissed_at = ''
 type = 'r-shiny'
@@ -11,14 +11,14 @@ id = '69f7f46b-0a2d-4583-a5ad-70510fd0a68c'
 dashboard_url = 'https://pub.current.posit.team/connect/#/apps/69f7f46b-0a2d-4583-a5ad-70510fd0a68c'
 direct_url = 'https://pub.current.posit.team/content/69f7f46b-0a2d-4583-a5ad-70510fd0a68c/'
 logs_url = 'https://pub.current.posit.team/connect/#/apps/69f7f46b-0a2d-4583-a5ad-70510fd0a68c/logs'
-deployed_at = '2025-12-01T17:26:18-05:00'
-bundle_id = '9242'
-bundle_url = 'https://pub.current.posit.team/__api__/v1/content/69f7f46b-0a2d-4583-a5ad-70510fd0a68c/bundles/9242/download'
+deployed_at = '2025-12-09T04:49:34Z'
+bundle_id = '9463'
+bundle_url = 'https://pub.current.posit.team/__api__/v1/content/69f7f46b-0a2d-4583-a5ad-70510fd0a68c/bundles/9463/download'
 files = [
+  '.Rprofile',
   '.posit/publish/RiskMetrics Actuarial Risk-TO1K.toml',
   '.posit/publish/deployments/deployment-O0NF.toml',
   '_brand.yml',
-  'api.R',
   'app.R',
   'data/generate_data.R',
   'data/synthetic-claims-history.csv',
@@ -48,19 +48,19 @@ files = [
   '/data',
   '/ml',
   '/_brand.yml',
-  '/api.R'
+  '/.Rprofile'
 ]
 title = 'RiskMetrics Actuarial Risk'
 
 [configuration.r]
-version = '4.5.1'
+version = '4.4.3'
 package_file = 'renv.lock'
 package_manager = 'renv'
-requires_r = '~=4.5.0'
+requires_r = '~=4.4.0'
 
 [renv]
 [renv.r]
-version = '4.5.1'
+version = '4.4.3'
 
 [[renv.r.repositories]]
 name = 'CRAN'
@@ -209,7 +209,7 @@ author = 'Matt Wand [aut], Cleve Moler [ctb] (LINPACK routines in src/d*), Brian
 package = 'MASS'
 version = '7.3-65'
 source = 'Repository'
-repository = 'CRAN'
+repository = 'RSPM'
 depends = ['R (>= 4.4.0)', 'grDevices', 'graphics', 'stats', 'utils']
 hash = ''
 title = "Support Functions and Datasets for Venables and Ripley's MASS"
@@ -220,12 +220,13 @@ url = 'http://www.stats.ox.ac.uk/pub/MASS4/'
 license = 'GPL-2 | GPL-3'
 imports = ['methods']
 suggests = ['lattice', 'nlme', 'nnet', 'survival']
+encoding = 'UTF-8'
 needscompilation = 'yes'
 author = 'Brian Ripley [aut, cre, cph], Bill Venables [aut, cph], Douglas M. Bates [ctb], Kurt Hornik [trl] (partial port ca 1998), Albrecht Gebhardt [trl] (partial port ca 1998), David Firth [ctb] (support functions for polr)'
 
 [renv.packages.Matrix]
 package = 'Matrix'
-version = '1.7-3'
+version = '1.7-4'
 source = 'Repository'
 repository = 'CRAN'
 depends = ['R (>= 4.4)', 'methods']
@@ -241,7 +242,7 @@ imports = ['grDevices', 'graphics', 'grid', 'lattice', 'stats', 'utils']
 suggests = ['MASS', 'datasets', 'sfsmisc', 'tools']
 encoding = 'UTF-8'
 needscompilation = 'yes'
-author = "Douglas Bates [aut] (<https://orcid.org/0000-0001-8316-9503>), Martin Maechler [aut, cre] (<https://orcid.org/0000-0002-8685-9910>), Mikael Jagan [aut] (<https://orcid.org/0000-0002-3542-2938>), Timothy A. Davis [ctb] (<https://orcid.org/0000-0001-7614-6899>, SuiteSparse libraries, collaborators listed in dir(system.file(\"doc\", \"SuiteSparse\", package=\"Matrix\"), pattern=\"License\", full.names=TRUE, recursive=TRUE)), George Karypis [ctb] (<https://orcid.org/0000-0003-2753-1437>, METIS library, Copyright: Regents of the University of Minnesota), Jason Riedy [ctb] (<https://orcid.org/0000-0002-4345-4200>, GNU Octave's condest() and onenormest(), Copyright: Regents of the University of California), Jens Oehlschlägel [ctb] (initial nearPD()), R Core Team [ctb] (02zz1nj61, base R's matrix implementation)"
+author = "Douglas Bates [aut] (ORCID: <https://orcid.org/0000-0001-8316-9503>), Martin Maechler [aut, cre] (ORCID: <https://orcid.org/0000-0002-8685-9910>), Mikael Jagan [aut] (ORCID: <https://orcid.org/0000-0002-3542-2938>), Timothy A. Davis [ctb] (ORCID: <https://orcid.org/0000-0001-7614-6899>, SuiteSparse libraries, collaborators listed in dir(system.file(\"doc\", \"SuiteSparse\", package=\"Matrix\"), pattern=\"License\", full.names=TRUE, recursive=TRUE)), George Karypis [ctb] (ORCID: <https://orcid.org/0000-0003-2753-1437>, METIS library, Copyright: Regents of the University of Minnesota), Jason Riedy [ctb] (ORCID: <https://orcid.org/0000-0002-4345-4200>, GNU Octave's condest() and onenormest(), Copyright: Regents of the University of California), Jens Oehlschlägel [ctb] (initial nearPD()), R Core Team [ctb] (ROR: <https://ror.org/02zz1nj61>, base R's matrix implementation)"
 
 [renv.packages.R6]
 package = 'R6'
@@ -328,7 +329,7 @@ author = 'Object-Oriented Programming Working Group [cph], Davis Vaughan [aut], 
 package = 'SQUAREM'
 version = '2021.1'
 source = 'Repository'
-repository = 'CRAN'
+repository = 'RSPM'
 depends = ['R (>= 3.0)']
 hash = ''
 title = 'Squared Extrapolation Methods for Accelerating EM-Like Monotone Algorithms'
@@ -337,6 +338,7 @@ description = 'Algorithms for accelerating the convergence of slow, monotone seq
 url = 'https://coah.jhu.edu/people/Faculty_personal_Pages/Varadhan.html'
 license = 'GPL (>= 2)'
 suggests = ['setRNG']
+encoding = 'UTF-8'
 needscompilation = 'no'
 author = 'Ravi Varadhan'
 
@@ -488,7 +490,7 @@ author = 'Michael Chirico [aut, cre], Jens Oehlschlägel [aut], Leonardo Silvest
 package = 'bitops'
 version = '1.0-9'
 source = 'Repository'
-repository = 'CRAN'
+repository = 'RSPM'
 hash = ''
 title = 'Bitwise Operations'
 'authors@r' = "c( person(\"Steve\", \"Dutky\", role = \"aut\", email = \"sdutky@terpalum.umd.edu\", comment = \"S original; then (after MM's port) revised and modified\"), person(\"Martin\", \"Maechler\", role = c(\"cre\", \"aut\"), email = \"maechler@stat.math.ethz.ch\", comment = c(\"Initial R port; tweaks\", ORCID = \"0000-0002-8685-9910\")))"
@@ -497,6 +499,7 @@ description = 'Functions for bitwise operations on integer vectors.'
 url = 'https://github.com/mmaechler/R-bitops'
 bugreports = 'https://github.com/mmaechler/R-bitops/issues'
 license = 'GPL (>= 2)'
+encoding = 'UTF-8'
 needscompilation = 'yes'
 author = "Steve Dutky [aut] (S original; then (after MM's port) revised and modified), Martin Maechler [cre, aut] (Initial R port; tweaks, <https://orcid.org/0000-0002-8685-9910>)"
 
@@ -787,7 +790,7 @@ author = 'Brian Ripley [aut, cre, cph], William Venables [cph]'
 package = 'cli'
 version = '3.6.5'
 source = 'Repository'
-repository = 'CRAN'
+repository = 'https://pkg.current.posit.team/blended-r/__linux__/jammy/latest'
 depends = ['R (>= 3.4)']
 hash = ''
 title = 'Helpers for Developing Command Line Interfaces'
@@ -1098,7 +1101,7 @@ author = 'Gábor Csárdi [aut, cre], Kirill Müller [aut], Jim Hester [aut], Ma�
 package = 'diagram'
 version = '1.6.5'
 source = 'Repository'
-repository = 'CRAN'
+repository = 'RSPM'
 depends = ['R (>= 2.01)', 'shape']
 hash = ''
 title = 'Functions for Visualising Simple Graphs (Networks), Plotting Flow Diagrams'
@@ -1106,6 +1109,7 @@ maintainer = 'Karline Soetaert <karline.soetaert@nioz.nl>'
 description = 'Visualises simple graphs (networks) based on a transition matrix, utilities to plot flow diagrams,  visualising webs, electrical networks, etc. Support for the book "A practical guide to ecological modelling - using R as a simulation platform" by Karline Soetaert and Peter M.J. Herman (2009), Springer. and the book "Solving Differential Equations in R" by Karline Soetaert, Jeff Cash and Francesca Mazzia (2012), Springer. Includes demo(flowchart), demo(plotmat), demo(plotweb).'
 license = 'GPL (>= 2)'
 imports = ['stats', 'graphics']
+encoding = 'UTF-8'
 needscompilation = 'no'
 author = 'Karline Soetaert <karline.soetaert@nioz.nl>'
 
@@ -1297,9 +1301,8 @@ source = 'GitHub'
 repository = ''
 hash = ''
 remote_type = 'github'
-remote_pkg_ref = 'thomasp85/fiery'
 remote_ref = 'HEAD'
-remote_sha = 'ca45290ee9923142778610464a2f26854c35e047'
+remote_sha = '2ee3c5b6c6ade121a177787c93209764abf1c81c'
 remote_host = 'api.github.com'
 remote_repo = 'fiery'
 remote_username = 'thomasp85'
@@ -1316,8 +1319,7 @@ suggests = ['callr', 'covr', 'future', 'knitr', 'logger', 'rmarkdown', 'testthat
 vignettebuilder = 'knitr'
 roxygennote = '7.3.3'
 encoding = 'UTF-8'
-needscompilation = 'no'
-author = 'Thomas Lin Pedersen [cre, aut] (ORCID: <https://orcid.org/0000-0002-5147-4711>)'
+author = 'Thomas Lin Pedersen [cre, aut] (<https://orcid.org/0000-0002-5147-4711>)'
 'config/testthat/edition' = '3'
 
 [renv.packages.fireproof]
@@ -1345,8 +1347,7 @@ suggests = ['callr', 'dplyr', 'quarto', 'rmarkdown', 'storr', 'testthat (>= 3.0.
 vignettebuilder = 'quarto'
 roxygennote = '7.3.2'
 encoding = 'UTF-8'
-needscompilation = 'no'
-author = 'Thomas Lin Pedersen [aut, cre] (ORCID: <https://orcid.org/0000-0002-5147-4711>)'
+author = 'Thomas Lin Pedersen [aut, cre] (<https://orcid.org/0000-0002-5147-4711>)'
 'config/testthat/edition' = '3'
 
 [renv.packages.firesafety]
@@ -1463,7 +1464,7 @@ author = 'Hadley Wickham [aut, cre], Posit Software, PBC [cph, fnd] (ROR: <https
 package = 'foreach'
 version = '1.5.2'
 source = 'Repository'
-repository = 'CRAN'
+repository = 'RSPM'
 depends = ['R (>= 2.5.0)']
 hash = ''
 type = 'Package'
@@ -1478,6 +1479,7 @@ imports = ['codetools', 'utils', 'iterators']
 suggests = ['randomForest', 'doMC', 'doParallel', 'testthat', 'knitr', 'rmarkdown']
 vignettebuilder = 'knitr'
 roxygennote = '7.1.1'
+encoding = 'UTF-8'
 needscompilation = 'no'
 author = 'Folashade Daniel [cre], Hong Ooi [ctb], Rich Calaway [ctb], Microsoft [aut, cph], Steve Weston [aut]'
 
@@ -1485,7 +1487,7 @@ author = 'Folashade Daniel [cre], Hong Ooi [ctb], Rich Calaway [ctb], Microsoft 
 package = 'fs'
 version = '1.6.6'
 source = 'Repository'
-repository = 'CRAN'
+repository = 'https://pkg.current.posit.team/blended-r/__linux__/jammy/latest'
 depends = ['R (>= 3.6)']
 hash = ''
 title = "Cross-Platform File System Operations Based on 'libuv'"
@@ -1763,7 +1765,7 @@ author = 'Jennifer Bryan [cre, aut] (ORCID: <https://orcid.org/0000-0002-6983-27
 package = 'gower'
 version = '1.0.2'
 source = 'Repository'
-repository = 'CRAN'
+repository = 'RSPM'
 hash = ''
 type = 'Package'
 title = "Gower's Distance"
@@ -1775,6 +1777,7 @@ bugreports = 'https://github.com/markvanderloo/gower/issues'
 license = 'GPL-3'
 suggests = ['tinytest (>= 0.9.3)']
 roxygennote = '7.3.2'
+encoding = 'UTF-8'
 needscompilation = 'yes'
 author = 'Mark van der Loo [aut, cre], David Turner [ctb]'
 
@@ -2086,7 +2089,7 @@ author = 'Andrew Bray [aut], Chester Ismay [aut] (ORCID: <https://orcid.org/0000
 package = 'ipred'
 version = '0.9-15'
 source = 'Repository'
-repository = 'CRAN'
+repository = 'RSPM'
 depends = ['R (>= 2.10)']
 hash = ''
 title = 'Improved Predictors'
@@ -2096,6 +2099,7 @@ description = 'Improved predictive models by indirect classification and bagging
 license = 'GPL (>= 2)'
 imports = ['rpart (>= 3.1-8)', 'MASS', 'survival', 'nnet', 'class', 'prodlim']
 suggests = ['mvtnorm', 'mlbench', 'TH.data', 'randomForest', 'party']
+encoding = 'UTF-8'
 needscompilation = 'yes'
 author = 'Andrea Peters [aut], Torsten Hothorn [aut, cre], Brian D. Ripley [ctb], Terry Therneau [ctb], Beth Atkinson [ctb]'
 
@@ -2127,7 +2131,7 @@ systemrequirements = 'C++11'
 package = 'iterators'
 version = '1.0.14'
 source = 'Repository'
-repository = 'CRAN'
+repository = 'RSPM'
 depends = ['R (>= 2.5.0)', 'utils']
 hash = ''
 type = 'Package'
@@ -2138,6 +2142,7 @@ description = 'Support for iterators, which allow a programmer to traverse throu
 url = 'https://github.com/RevolutionAnalytics/iterators'
 license = 'Apache License (== 2.0)'
 suggests = ['RUnit', 'foreach']
+encoding = 'UTF-8'
 needscompilation = 'no'
 author = 'Folashade Daniel [cre], Revolution Analytics [aut, cph], Steve Weston [aut]'
 
@@ -2187,7 +2192,7 @@ author = 'Carson Sievert [aut, cre] (<https://orcid.org/0000-0002-4958-2844>), J
 package = 'jsonlite'
 version = '2.0.0'
 source = 'Repository'
-repository = 'CRAN'
+repository = 'https://pkg.current.posit.team/blended-r/__linux__/jammy/latest'
 depends = ['methods']
 hash = ''
 title = 'A Simple and Robust JSON Parser and Generator for R'
@@ -2293,7 +2298,7 @@ author = 'Winston Chang [aut], Joe Cheng [aut], Charlie Gao [aut, cre] (ORCID: <
 package = 'lattice'
 version = '0.22-7'
 source = 'Repository'
-repository = 'CRAN'
+repository = 'RSPM'
 depends = ['R (>= 4.0.0)']
 hash = ''
 title = 'Trellis Graphics for R'
@@ -2305,6 +2310,7 @@ bugreports = 'https://github.com/deepayan/lattice/issues'
 license = 'GPL (>= 2)'
 imports = ['grid', 'grDevices', 'graphics', 'stats', 'utils']
 suggests = ['KernSmooth', 'MASS', 'latticeExtra', 'colorspace']
+encoding = 'UTF-8'
 needscompilation = 'yes'
 author = 'Deepayan Sarkar [aut, cre] (<https://orcid.org/0000-0003-4107-1553>), Felix Andrews [ctb], Kevin Wright [ctb] (documentation), Neil Klepeis [ctb], Johan Larsson [ctb] (miscellaneous improvements), Zhijian (Jason) Wen [cph] (filled contour code), Paul Murrell [ctb], Stefan Eng [ctb] (violin plot improvements), Achim Zeileis [ctb] (modern colors), Alexandre Courtiol [ctb] (generics for larrows, lpolygon, lrect and lsegments)'
 
@@ -2335,7 +2341,7 @@ author = 'Klaus K. Holst [aut, cre], Brice Ozenne [ctb], Thomas Gerds [ctb]'
 package = 'lazyeval'
 version = '0.2.2'
 source = 'Repository'
-repository = 'CRAN'
+repository = 'RSPM'
 depends = ['R (>= 3.1.0)']
 hash = ''
 title = 'Lazy (Non-Standard) Evaluation'
@@ -2346,6 +2352,7 @@ license = 'GPL-3'
 suggests = ['knitr', 'rmarkdown (>= 0.2.65)', 'testthat', 'covr']
 vignettebuilder = 'knitr'
 roxygennote = '6.1.1'
+encoding = 'UTF-8'
 needscompilation = 'yes'
 author = 'Hadley Wickham [aut, cre], RStudio [cph]'
 
@@ -2558,7 +2565,7 @@ author = 'Hadley Wickham [aut], Jim Hester [aut], Winston Chang [aut, cre], Kiri
 package = 'mime'
 version = '0.13'
 source = 'Repository'
-repository = 'CRAN'
+repository = 'https://pkg.current.posit.team/blended-r/__linux__/jammy/latest'
 hash = ''
 type = 'Package'
 title = 'Map Filenames to MIME Types'
@@ -2576,7 +2583,7 @@ author = 'Yihui Xie [aut, cre] (<https://orcid.org/0000-0003-0645-5666>, https:/
 
 [renv.packages.mirai]
 package = 'mirai'
-version = '2.5.2'
+version = '2.5.3'
 source = 'Repository'
 repository = 'CRAN'
 depends = ['R (>= 3.6)']
@@ -2585,7 +2592,7 @@ type = 'Package'
 title = 'Minimalist Async Evaluation Framework for R'
 'authors@r' = 'c( person("Charlie", "Gao", , "charlie.gao@posit.co", role = c("aut", "cre"), comment = c(ORCID = "0000-0002-0750-061X")), person("Joe", "Cheng", , "joe@posit.co", role = "ctb"), person("Posit Software, PBC", role = c("cph", "fnd"), comment = c(ROR = "03wc8by49")), person("Hibiki AI Limited", role = "cph") )'
 maintainer = 'Charlie Gao <charlie.gao@posit.co>'
-description = "Designed for simplicity, a 'mirai' evaluates an R expression asynchronously, locally or distributed over the network. Built on 'nanonext' and 'NNG' for modern networking and concurrency, scales efficiently to millions of tasks over thousands of persistent parallel processes. Provides optimal scheduling over fast 'IPC', TCP, and TLS connections, integrating with SSH or cluster managers. Implements event-driven promises for reactive programming, and supports custom serialization for cross-language data types."
+description = "Designed for simplicity, a 'mirai' evaluates an R expression asynchronously, locally or distributed over the network. Built on 'nanonext' and 'NNG' for modern networking and concurrency, scales efficiently to millions of tasks over thousands of parallel processes. Provides optimal scheduling over fast 'IPC', TCP, and TLS connections, integrating with SSH or cluster managers. Implements event-driven promises for reactive programming, and supports custom serialization for cross-language data types."
 url = 'https://mirai.r-lib.org, https://github.com/r-lib/mirai'
 bugreports = 'https://github.com/r-lib/mirai/issues'
 license = 'MIT + file LICENSE'
@@ -2711,7 +2718,7 @@ author = 'Brian Ripley [aut, cre, cph], William Venables [cph]'
 package = 'numDeriv'
 version = '2016.8-1.1'
 source = 'Repository'
-repository = 'CRAN'
+repository = 'RSPM'
 depends = ['R (>= 2.11.1)']
 hash = ''
 title = 'Accurate Numerical Derivatives'
@@ -2719,6 +2726,7 @@ maintainer = 'Paul Gilbert <pgilbert.ttv9z@ncf.ca>'
 description = "Methods for calculating (usually) accurate numerical first and second order derivatives. Accurate calculations  are done using 'Richardson''s' extrapolation or, when applicable, a complex step derivative is available. A simple difference  method is also provided. Simple difference is (usually) less accurate but is much quicker than 'Richardson''s' extrapolation and provides a  useful cross-check.  Methods are provided for real scalar and vector valued functions."
 url = 'http://optimizer.r-forge.r-project.org/'
 license = 'GPL-2'
+encoding = 'UTF-8'
 needscompilation = 'no'
 author = 'Paul Gilbert and Ravi Varadhan'
 
@@ -2790,13 +2798,13 @@ author = 'Henrik Bengtsson [aut, cre, cph] (ORCID: <https://orcid.org/0000-0002-
 
 [renv.packages.parsnip]
 package = 'parsnip'
-version = '1.3.3'
+version = '1.4.0'
 source = 'Repository'
 repository = 'CRAN'
 depends = ['R (>= 4.1)']
 hash = ''
 title = 'A Common API to Modeling and Analysis Functions'
-'authors@r' = 'c( person("Max", "Kuhn", , "max@posit.co", role = c("aut", "cre")), person("Davis", "Vaughan", , "davis@posit.co", role = "aut"), person("Emil", "Hvitfeldt", , "emil.hvitfeldt@posit.co", role = "ctb"), person("Posit Software, PBC", role = c("cph", "fnd"), comment = c(ROR = "03wc8by49")) )'
+'authors@r' = 'c( person("Max", "Kuhn", , "max@posit.co", role = c("cre", "aut"), comment = c(ORCID = "0000-0003-2402-136X")), person("Davis", "Vaughan", , "davis@posit.co", role = "aut"), person("Emil", "Hvitfeldt", , "emil.hvitfeldt@posit.co", role = "ctb"), person("Posit Software, PBC", role = c("cph", "fnd"), comment = c(ROR = "03wc8by49")) )'
 maintainer = 'Max Kuhn <max@posit.co>'
 description = "A common interface is provided to allow users to specify a model without having to remember the different argument names across different functions or computational engines (e.g. 'R', 'Spark', 'Stan', 'H2O', etc)."
 url = 'https://github.com/tidymodels/parsnip, https://parsnip.tidymodels.org/'
@@ -2805,12 +2813,12 @@ license = 'MIT + file LICENSE'
 imports = ['cli', 'dplyr (>= 1.1.0)', 'generics (>= 0.1.2)', 'ggplot2', 'globals', 'glue', 'hardhat (>= 1.4.1)', 'lifecycle', 'magrittr', 'pillar', 'prettyunits', 'purrr (>= 1.0.0)', 'rlang (>= 1.1.0)', 'sparsevctrs (>= 0.2.0)', 'stats', 'tibble (>= 2.1.1)', 'tidyr (>= 1.3.0)', 'utils', 'vctrs (>= 0.6.0)', 'withr']
 suggests = ['bench', 'C50', 'covr', 'dials (>= 1.1.0)', 'earth', 'ggrepel', 'keras', 'kernlab', 'kknn', 'knitr', 'LiblineaR', 'MASS', 'Matrix', 'methods', 'mgcv', 'modeldata', 'nlme', 'prodlim', 'ranger (>= 0.12.0)', 'remotes', 'rmarkdown', 'rpart', 'sparklyr (>= 1.0.0)', 'survival', 'tensorflow', 'testthat (>= 3.0.0)', 'xgboost (>= 1.5.0.1)']
 vignettebuilder = 'knitr'
-roxygennote = '7.3.2'
+roxygennote = '7.3.3'
 encoding = 'UTF-8'
 needscompilation = 'no'
-author = 'Max Kuhn [aut, cre], Davis Vaughan [aut], Emil Hvitfeldt [ctb], Posit Software, PBC [cph, fnd] (ROR: <https://ror.org/03wc8by49>)'
+author = 'Max Kuhn [cre, aut] (ORCID: <https://orcid.org/0000-0003-2402-136X>), Davis Vaughan [aut], Emil Hvitfeldt [ctb], Posit Software, PBC [cph, fnd] (ROR: <https://ror.org/03wc8by49>)'
 'config/testthat/edition' = '3'
-'config/needs/website' = 'brulee, C50, dbarts, earth, glmnet, keras, kernlab, kknn, LiblineaR, mgcv, nnet, parsnip, quantreg, randomForest, ranger, rpart, rstanarm, tidymodels/tidymodels, tidyverse/tidytemplate, rstudio/reticulate, xgboost, rmarkdown'
+'config/needs/website' = 'brulee, C50, dbarts, earth, glmnet, grf, keras, kernlab, kknn, LiblineaR, mgcv, nnet, parsnip, quantreg, randomForest, ranger, rpart, rstanarm, tidymodels/tidymodels, tidyverse/tidytemplate, rstudio/reticulate, xgboost, rmarkdown'
 
 [renv.packages.patchwork]
 package = 'patchwork'
@@ -3019,8 +3027,7 @@ suggests = ['arrow', 'callr', 'geojsonsf', 'htmlwidgets', 'later', 'mirai', 'nan
 vignettebuilder = 'quarto'
 roxygennote = '7.3.2'
 encoding = 'UTF-8'
-needscompilation = 'no'
-author = 'Thomas Lin Pedersen [aut, cre] (ORCID: <https://orcid.org/0000-0002-5147-4711>), Posit Software, PBC [cph, fnd] (ROR: <https://ror.org/03wc8by49>)'
+author = 'Thomas Lin Pedersen [aut, cre] (<https://orcid.org/0000-0002-5147-4711>), Posit Software, PBC [cph, fnd] (03wc8by49)'
 'config/testthat/edition' = '3'
 
 [renv.packages.prettyunits]
@@ -3070,7 +3077,7 @@ author = 'Gábor Csárdi [aut, cre, cph] (<https://orcid.org/0000-0001-7098-9676
 package = 'prodlim'
 version = '2025.04.28'
 source = 'Repository'
-repository = 'CRAN'
+repository = 'RSPM'
 depends = ['R (>= 4.1.0)']
 hash = ''
 title = 'Product-Limit Estimation for Censored Event History Analysis'
@@ -3083,6 +3090,7 @@ imports = ['Rcpp (>= 0.11.5)', 'stats', 'rlang', 'data.table', 'grDevices', 'ggp
 suggests = ['tibble', 'pammtools', 'ggthemes']
 linkingto = ['Rcpp']
 roxygennote = '7.3.2'
+encoding = 'UTF-8'
 needscompilation = 'yes'
 author = 'Thomas A. Gerds [aut, cre]'
 
@@ -3296,7 +3304,7 @@ author = 'Facebook Inc [aut, cph] (React library in lib, https://reactjs.org/; s
 
 [renv.packages.reactable]
 package = 'reactable'
-version = '0.4.4'
+version = '0.4.5'
 source = 'Repository'
 repository = 'CRAN'
 depends = ['R (>= 3.1)']
@@ -3486,9 +3494,8 @@ repository = ''
 depends = ['R (>= 3.5)']
 hash = ''
 remote_type = 'github'
-remote_pkg_ref = 'thomasp85/reqres'
 remote_ref = 'HEAD'
-remote_sha = 'bcbdc0d9ca10d042efda3fe3811f494851bb87df'
+remote_sha = 'd4e1a146bd81d81c2c3c9656eff5157335a76e8e'
 remote_host = 'api.github.com'
 remote_repo = 'reqres'
 remote_username = 'thomasp85'
@@ -3502,17 +3509,16 @@ bugreports = 'https://github.com/thomasp85/reqres/issues'
 license = 'MIT + file LICENSE'
 imports = ['R6', 'stringi', 'urltools', 'tools', 'brotli', 'jsonlite', 'xml2', 'webutils', 'utils', 'cli', 'rlang', 'lifecycle', 'base64enc', 'sodium', 'promises', 'mirai', 'otel']
 suggests = ['fiery', 'testthat (>= 3.0.0)', 'covr', 'keyring', 'shiny']
-roxygennote = '7.3.2'
+roxygennote = '7.3.3'
 encoding = 'UTF-8'
-needscompilation = 'yes'
-author = 'Thomas Lin Pedersen [cre, aut] (ORCID: <https://orcid.org/0000-0002-5147-4711>)'
+author = 'Thomas Lin Pedersen [cre, aut] (<https://orcid.org/0000-0002-5147-4711>)'
 'config/testthat/edition' = '3'
 
 [renv.packages.rlang]
 package = 'rlang'
 version = '1.1.6'
 source = 'Repository'
-repository = 'CRAN'
+repository = 'https://pkg.current.posit.team/blended-r/__linux__/jammy/latest'
 depends = ['R (>= 3.5.0)']
 hash = ''
 title = "Functions for Base Types and Core R and 'Tidyverse' Features"
@@ -3562,7 +3568,6 @@ package = 'routr'
 version = '1.1.0.9000'
 source = 'GitHub'
 repository = ''
-depends = ['R (>= 4.1.0)']
 hash = ''
 remote_type = 'github'
 remote_pkg_ref = 'thomasp85/routr'
@@ -3583,8 +3588,7 @@ imports = ['R6', 'reqres (>= 1.0.0)', 'stringi', 'rlang (>= 1.1.0)', 'cli', 'lif
 suggests = ['testthat (>= 3.0.0)', 'covr', 'fiery (>= 1.3.0)', 'swagger', 'redoc', 'rapidoc', 'rmarkdown', 'quarto', 'mirai', 'knitr', 'later', 'jsonlite', 'yaml']
 roxygennote = '7.3.3'
 encoding = 'UTF-8'
-needscompilation = 'no'
-author = 'Thomas Lin Pedersen [cre, aut] (ORCID: <https://orcid.org/0000-0002-5147-4711>)'
+author = 'Thomas Lin Pedersen [cre, aut] (<https://orcid.org/0000-0002-5147-4711>)'
 'config/testthat/edition' = '3'
 
 [renv.packages.roxygen2]
@@ -3725,7 +3729,7 @@ author = 'Hadley Wickham [aut, cre], Posit Software, PBC [cph, fnd] (ROR: <https
 package = 'sass'
 version = '0.4.10'
 source = 'Repository'
-repository = 'CRAN'
+repository = 'https://pkg.current.posit.team/blended-r/__linux__/jammy/latest'
 hash = ''
 type = 'Package'
 title = "Syntactically Awesome Style Sheets ('Sass')"
@@ -3812,7 +3816,7 @@ author = 'Max Kuhn [aut, cre] (<https://orcid.org/0000-0003-2402-136X>)'
 package = 'shape'
 version = '1.4.6.1'
 source = 'Repository'
-repository = 'CRAN'
+repository = 'RSPM'
 depends = ['R (>= 2.01)']
 hash = ''
 title = 'Functions for Plotting Graphical Shapes, Colors'
@@ -3820,30 +3824,31 @@ maintainer = 'Karline Soetaert <karline.soetaert@nioz.nl>'
 description = 'Functions for plotting graphical shapes such as ellipses, circles, cylinders, arrows, ...'
 license = 'GPL (>= 3)'
 imports = ['stats', 'graphics', 'grDevices']
+encoding = 'UTF-8'
 needscompilation = 'no'
 author = 'Karline Soetaert <karline.soetaert@nioz.nl>'
 
 [renv.packages.shiny]
 package = 'shiny'
-version = '1.11.1'
+version = '1.12.0'
 source = 'Repository'
 repository = 'CRAN'
-depends = ['R (>= 3.0.2)', 'methods']
+depends = ['methods', 'R (>= 3.0.2)']
 hash = ''
 type = 'Package'
 title = 'Web Application Framework for R'
-'authors@r' = "c( person(\"Winston\", \"Chang\", role = c(\"aut\", \"cre\"), email = \"winston@posit.co\", comment = c(ORCID = \"0000-0002-1576-2126\")), person(\"Joe\", \"Cheng\", role = \"aut\", email = \"joe@posit.co\"), person(\"JJ\", \"Allaire\", role = \"aut\", email = \"jj@posit.co\"), person(\"Carson\", \"Sievert\", role = \"aut\", email = \"carson@posit.co\", comment = c(ORCID = \"0000-0002-4958-2844\")), person(\"Barret\", \"Schloerke\", role = \"aut\", email = \"barret@posit.co\", comment = c(ORCID = \"0000-0001-9986-114X\")), person(\"Yihui\", \"Xie\", role = \"aut\", email = \"yihui@posit.co\"), person(\"Jeff\", \"Allen\", role = \"aut\"), person(\"Jonathan\", \"McPherson\", role = \"aut\", email = \"jonathan@posit.co\"), person(\"Alan\", \"Dipert\", role = \"aut\"), person(\"Barbara\", \"Borges\", role = \"aut\"), person(\"Posit Software, PBC\", role = c(\"cph\", \"fnd\")), person(family = \"jQuery Foundation\", role = \"cph\", comment = \"jQuery library and jQuery UI library\"), person(family = \"jQuery contributors\", role = c(\"ctb\", \"cph\"), comment = \"jQuery library; authors listed in inst/www/shared/jquery-AUTHORS.txt\"), person(family = \"jQuery UI contributors\", role = c(\"ctb\", \"cph\"), comment = \"jQuery UI library; authors listed in inst/www/shared/jqueryui/AUTHORS.txt\"), person(\"Mark\", \"Otto\", role = \"ctb\", comment = \"Bootstrap library\"), person(\"Jacob\", \"Thornton\", role = \"ctb\", comment = \"Bootstrap library\"), person(family = \"Bootstrap contributors\", role = \"ctb\", comment = \"Bootstrap library\"), person(family = \"Twitter, Inc\", role = \"cph\", comment = \"Bootstrap library\"), person(\"Prem Nawaz\", \"Khan\", role = \"ctb\", comment = \"Bootstrap accessibility plugin\"), person(\"Victor\", \"Tsaran\", role = \"ctb\", comment = \"Bootstrap accessibility plugin\"), person(\"Dennis\", \"Lembree\", role = \"ctb\", comment = \"Bootstrap accessibility plugin\"), person(\"Srinivasu\", \"Chakravarthula\", role = \"ctb\", comment = \"Bootstrap accessibility plugin\"), person(\"Cathy\", \"O'Connor\", role = \"ctb\", comment = \"Bootstrap accessibility plugin\"), person(family = \"PayPal, Inc\", role = \"cph\", comment = \"Bootstrap accessibility plugin\"), person(\"Stefan\", \"Petre\", role = c(\"ctb\", \"cph\"), comment = \"Bootstrap-datepicker library\"), person(\"Andrew\", \"Rowls\", role = c(\"ctb\", \"cph\"), comment = \"Bootstrap-datepicker library\"), person(\"Brian\", \"Reavis\", role = c(\"ctb\", \"cph\"), comment = \"selectize.js library\"), person(\"Salmen\", \"Bejaoui\", role = c(\"ctb\", \"cph\"), comment = \"selectize-plugin-a11y library\"), person(\"Denis\", \"Ineshin\", role = c(\"ctb\", \"cph\"), comment = \"ion.rangeSlider library\"), person(\"Sami\", \"Samhuri\", role = c(\"ctb\", \"cph\"), comment = \"Javascript strftime library\"), person(family = \"SpryMedia Limited\", role = c(\"ctb\", \"cph\"), comment = \"DataTables library\"), person(\"John\", \"Fraser\", role = c(\"ctb\", \"cph\"), comment = \"showdown.js library\"), person(\"John\", \"Gruber\", role = c(\"ctb\", \"cph\"), comment = \"showdown.js library\"), person(\"Ivan\", \"Sagalaev\", role = c(\"ctb\", \"cph\"), comment = \"highlight.js library\"), person(given = \"R Core Team\", role = c(\"ctb\", \"cph\"), comment = \"tar implementation from R\") )"
-maintainer = 'Winston Chang <winston@posit.co>'
+'authors@r' = "c( person(\"Winston\", \"Chang\", , \"winston@posit.co\", role = \"aut\", comment = c(ORCID = \"0000-0002-1576-2126\")), person(\"Joe\", \"Cheng\", , \"joe@posit.co\", role = \"aut\"), person(\"JJ\", \"Allaire\", , \"jj@posit.co\", role = \"aut\"), person(\"Carson\", \"Sievert\", , \"carson@posit.co\", role = c(\"aut\", \"cre\"), comment = c(ORCID = \"0000-0002-4958-2844\")), person(\"Barret\", \"Schloerke\", , \"barret@posit.co\", role = \"aut\", comment = c(ORCID = \"0000-0001-9986-114X\")), person(\"Garrick\", \"Aden-Buie\", , \"garrick@adenbuie.com\", role = \"aut\", comment = c(ORCID = \"0000-0002-7111-0077\")), person(\"Yihui\", \"Xie\", , \"yihui@posit.co\", role = \"aut\"), person(\"Jeff\", \"Allen\", role = \"aut\"), person(\"Jonathan\", \"McPherson\", , \"jonathan@posit.co\", role = \"aut\"), person(\"Alan\", \"Dipert\", role = \"aut\"), person(\"Barbara\", \"Borges\", role = \"aut\"), person(\"Posit Software, PBC\", role = c(\"cph\", \"fnd\"), comment = c(ROR = \"03wc8by49\")), person(, \"jQuery Foundation\", role = \"cph\", comment = \"jQuery library and jQuery UI library\"), person(, \"jQuery contributors\", role = c(\"ctb\", \"cph\"), comment = \"jQuery library; authors listed in inst/www/shared/jquery-AUTHORS.txt\"), person(, \"jQuery UI contributors\", role = c(\"ctb\", \"cph\"), comment = \"jQuery UI library; authors listed in inst/www/shared/jqueryui/AUTHORS.txt\"), person(\"Mark\", \"Otto\", role = \"ctb\", comment = \"Bootstrap library\"), person(\"Jacob\", \"Thornton\", role = \"ctb\", comment = \"Bootstrap library\"), person(, \"Bootstrap contributors\", role = \"ctb\", comment = \"Bootstrap library\"), person(, \"Twitter, Inc\", role = \"cph\", comment = \"Bootstrap library\"), person(\"Prem Nawaz\", \"Khan\", role = \"ctb\", comment = \"Bootstrap accessibility plugin\"), person(\"Victor\", \"Tsaran\", role = \"ctb\", comment = \"Bootstrap accessibility plugin\"), person(\"Dennis\", \"Lembree\", role = \"ctb\", comment = \"Bootstrap accessibility plugin\"), person(\"Srinivasu\", \"Chakravarthula\", role = \"ctb\", comment = \"Bootstrap accessibility plugin\"), person(\"Cathy\", \"O'Connor\", role = \"ctb\", comment = \"Bootstrap accessibility plugin\"), person(, \"PayPal, Inc\", role = \"cph\", comment = \"Bootstrap accessibility plugin\"), person(\"Stefan\", \"Petre\", role = c(\"ctb\", \"cph\"), comment = \"Bootstrap-datepicker library\"), person(\"Andrew\", \"Rowls\", role = c(\"ctb\", \"cph\"), comment = \"Bootstrap-datepicker library\"), person(\"Brian\", \"Reavis\", role = c(\"ctb\", \"cph\"), comment = \"selectize.js library\"), person(\"Salmen\", \"Bejaoui\", role = c(\"ctb\", \"cph\"), comment = \"selectize-plugin-a11y library\"), person(\"Denis\", \"Ineshin\", role = c(\"ctb\", \"cph\"), comment = \"ion.rangeSlider library\"), person(\"Sami\", \"Samhuri\", role = c(\"ctb\", \"cph\"), comment = \"Javascript strftime library\"), person(, \"SpryMedia Limited\", role = c(\"ctb\", \"cph\"), comment = \"DataTables library\"), person(\"Ivan\", \"Sagalaev\", role = c(\"ctb\", \"cph\"), comment = \"highlight.js library\"), person(\"R Core Team\", role = c(\"ctb\", \"cph\"), comment = \"tar implementation from R\") )"
+maintainer = 'Carson Sievert <carson@posit.co>'
 description = 'Makes it incredibly easy to build interactive web applications with R. Automatic "reactive" binding between inputs and outputs and extensive prebuilt widgets make it possible to build beautiful, responsive, and powerful applications with minimal effort.'
 url = 'https://shiny.posit.co/, https://github.com/rstudio/shiny'
 bugreports = 'https://github.com/rstudio/shiny/issues'
 license = 'GPL-3 | file LICENSE'
-imports = ['utils', 'grDevices', 'httpuv (>= 1.5.2)', 'mime (>= 0.3)', 'jsonlite (>= 0.9.16)', 'xtable', 'fontawesome (>= 0.4.0)', 'htmltools (>= 0.5.4)', 'R6 (>= 2.0)', 'sourcetools', 'later (>= 1.0.0)', 'promises (>= 1.3.2)', 'tools', 'cli', 'rlang (>= 0.4.10)', 'fastmap (>= 1.1.1)', 'withr', 'commonmark (>= 1.7)', 'glue (>= 1.3.2)', 'bslib (>= 0.6.0)', 'cachem (>= 1.1.0)', 'lifecycle (>= 0.2.0)']
-suggests = ['coro (>= 1.1.0)', 'datasets', 'DT', 'Cairo (>= 1.5-5)', 'testthat (>= 3.2.1)', 'knitr (>= 1.6)', 'markdown', 'rmarkdown', 'ggplot2', 'reactlog (>= 1.0.0)', 'magrittr', 'yaml', 'mirai', 'future', 'dygraphs', 'ragg', 'showtext', 'sass', 'watcher']
-roxygennote = '7.3.2'
+imports = ['bslib (>= 0.6.0)', 'cachem (>= 1.1.0)', 'cli', 'commonmark (>= 2.0.0)', 'fastmap (>= 1.1.1)', 'fontawesome (>= 0.4.0)', 'glue (>= 1.3.2)', 'grDevices', 'htmltools (>= 0.5.4)', 'httpuv (>= 1.5.2)', 'jsonlite (>= 0.9.16)', 'later (>= 1.0.0)', 'lifecycle (>= 0.2.0)', 'mime (>= 0.3)', 'otel', 'promises (>= 1.5.0)', 'R6 (>= 2.0)', 'rlang (>= 0.4.10)', 'sourcetools', 'tools', 'utils', 'withr', 'xtable']
+suggests = ['Cairo (>= 1.5-5)', 'coro (>= 1.1.0)', 'datasets', 'DT', 'dygraphs', 'future', 'ggplot2', 'knitr (>= 1.6)', 'magrittr', 'markdown', 'mirai', 'otelsdk (>= 0.2.0)', 'ragg', 'reactlog (>= 1.0.0)', 'rmarkdown', 'sass', 'showtext', 'testthat (>= 3.2.1)', 'watcher', 'yaml']
+roxygennote = '7.3.3'
 encoding = 'UTF-8'
 needscompilation = 'no'
-author = "Winston Chang [aut, cre] (ORCID: <https://orcid.org/0000-0002-1576-2126>), Joe Cheng [aut], JJ Allaire [aut], Carson Sievert [aut] (ORCID: <https://orcid.org/0000-0002-4958-2844>), Barret Schloerke [aut] (ORCID: <https://orcid.org/0000-0001-9986-114X>), Yihui Xie [aut], Jeff Allen [aut], Jonathan McPherson [aut], Alan Dipert [aut], Barbara Borges [aut], Posit Software, PBC [cph, fnd], jQuery Foundation [cph] (jQuery library and jQuery UI library), jQuery contributors [ctb, cph] (jQuery library; authors listed in inst/www/shared/jquery-AUTHORS.txt), jQuery UI contributors [ctb, cph] (jQuery UI library; authors listed in inst/www/shared/jqueryui/AUTHORS.txt), Mark Otto [ctb] (Bootstrap library), Jacob Thornton [ctb] (Bootstrap library), Bootstrap contributors [ctb] (Bootstrap library), Twitter, Inc [cph] (Bootstrap library), Prem Nawaz Khan [ctb] (Bootstrap accessibility plugin), Victor Tsaran [ctb] (Bootstrap accessibility plugin), Dennis Lembree [ctb] (Bootstrap accessibility plugin), Srinivasu Chakravarthula [ctb] (Bootstrap accessibility plugin), Cathy O'Connor [ctb] (Bootstrap accessibility plugin), PayPal, Inc [cph] (Bootstrap accessibility plugin), Stefan Petre [ctb, cph] (Bootstrap-datepicker library), Andrew Rowls [ctb, cph] (Bootstrap-datepicker library), Brian Reavis [ctb, cph] (selectize.js library), Salmen Bejaoui [ctb, cph] (selectize-plugin-a11y library), Denis Ineshin [ctb, cph] (ion.rangeSlider library), Sami Samhuri [ctb, cph] (Javascript strftime library), SpryMedia Limited [ctb, cph] (DataTables library), John Fraser [ctb, cph] (showdown.js library), John Gruber [ctb, cph] (showdown.js library), Ivan Sagalaev [ctb, cph] (highlight.js library), R Core Team [ctb, cph] (tar implementation from R)"
+author = "Winston Chang [aut] (ORCID: <https://orcid.org/0000-0002-1576-2126>), Joe Cheng [aut], JJ Allaire [aut], Carson Sievert [aut, cre] (ORCID: <https://orcid.org/0000-0002-4958-2844>), Barret Schloerke [aut] (ORCID: <https://orcid.org/0000-0001-9986-114X>), Garrick Aden-Buie [aut] (ORCID: <https://orcid.org/0000-0002-7111-0077>), Yihui Xie [aut], Jeff Allen [aut], Jonathan McPherson [aut], Alan Dipert [aut], Barbara Borges [aut], Posit Software, PBC [cph, fnd] (ROR: <https://ror.org/03wc8by49>), jQuery Foundation [cph] (jQuery library and jQuery UI library), jQuery contributors [ctb, cph] (jQuery library; authors listed in inst/www/shared/jquery-AUTHORS.txt), jQuery UI contributors [ctb, cph] (jQuery UI library; authors listed in inst/www/shared/jqueryui/AUTHORS.txt), Mark Otto [ctb] (Bootstrap library), Jacob Thornton [ctb] (Bootstrap library), Bootstrap contributors [ctb] (Bootstrap library), Twitter, Inc [cph] (Bootstrap library), Prem Nawaz Khan [ctb] (Bootstrap accessibility plugin), Victor Tsaran [ctb] (Bootstrap accessibility plugin), Dennis Lembree [ctb] (Bootstrap accessibility plugin), Srinivasu Chakravarthula [ctb] (Bootstrap accessibility plugin), Cathy O'Connor [ctb] (Bootstrap accessibility plugin), PayPal, Inc [cph] (Bootstrap accessibility plugin), Stefan Petre [ctb, cph] (Bootstrap-datepicker library), Andrew Rowls [ctb, cph] (Bootstrap-datepicker library), Brian Reavis [ctb, cph] (selectize.js library), Salmen Bejaoui [ctb, cph] (selectize-plugin-a11y library), Denis Ineshin [ctb, cph] (ion.rangeSlider library), Sami Samhuri [ctb, cph] (Javascript strftime library), SpryMedia Limited [ctb, cph] (DataTables library), Ivan Sagalaev [ctb, cph] (highlight.js library), R Core Team [ctb, cph] (tar implementation from R)"
 'config/testthat/edition' = '3'
 
 [renv.packages.shinychat]
@@ -3897,7 +3902,7 @@ author = 'Davis Vaughan [aut, cre], Posit Software, PBC [cph, fnd] (ROR: <https:
 package = 'sodium'
 version = '1.4.0'
 source = 'Repository'
-repository = 'CRAN'
+repository = 'https://p3m.dev/cran/__linux__/jammy/latest'
 hash = ''
 type = 'Package'
 title = 'A Modern and Easy-to-Use Crypto Library'
@@ -3910,6 +3915,7 @@ license = 'MIT + file LICENSE'
 suggests = ['knitr', 'rmarkdown']
 vignettebuilder = 'knitr'
 roxygennote = '7.2.3'
+encoding = 'UTF-8'
 needscompilation = 'yes'
 author = 'Jeroen Ooms [aut, cre] (<https://orcid.org/0000-0002-4035-0289>)'
 systemrequirements = 'libsodium (>= 1.0.3)'
@@ -4527,7 +4533,7 @@ author = 'Julia Silge [cre, aut] (ORCID: <https://orcid.org/0000-0002-3671-836X>
 
 [renv.packages.vip]
 package = 'vip'
-version = '0.4.1'
+version = '0.4.2'
 source = 'Repository'
 repository = 'CRAN'
 depends = ['R (>= 4.1.0)']
@@ -4536,17 +4542,17 @@ type = 'Package'
 title = 'Variable Importance Plots'
 'authors@r' = 'c( person(c("Brandon", "M."), family = "Greenwell",  email = "greenwell.brandon@gmail.com", role = c("aut", "cre"),  comment = c(ORCID = "0000-0002-8120-0084")), person("Brad", "Boehmke", email = "bradleyboehmke@gmail.com", role = c("aut"), comment = c(ORCID = "0000-0002-3611-8516")) )'
 maintainer = 'Brandon M. Greenwell <greenwell.brandon@gmail.com>'
-description = 'A general framework for constructing variable importance plots from  various types of machine learning models in R. Aside from some standard model- specific variable importance measures, this package also provides model- agnostic approaches that can be applied to any supervised learning algorithm. These include 1) an efficient permutation-based variable importance measure,  2) variable importance based on Shapley values (Strumbelj and Kononenko,  2014) <doi:10.1007/s10115-013-0679-x>, and 3) the variance-based  approach described in Greenwell et al. (2018) <arXiv:1805.04755>. A  variance-based method for quantifying the relative strength of interaction  effects is also included (see the previous reference for details).'
+description = 'A general framework for constructing variable importance plots from  various types of machine learning models in R. Aside from some standard model- specific variable importance measures, this package also provides model- agnostic approaches that can be applied to any supervised learning algorithm. These include 1) an efficient permutation-based variable importance measure,  2) variable importance based on Shapley values (Strumbelj and Kononenko,  2014) <doi:10.1007/s10115-013-0679-x>, and 3) the variance-based  approach described in Greenwell et al. (2018) <doi:10.48550/arXiv.1805.04755>. A  variance-based method for quantifying the relative strength of interaction  effects is also included (see the previous reference for details).'
 url = 'https://github.com/koalaverse/vip/, https://koalaverse.github.io/vip/'
 bugreports = 'https://github.com/koalaverse/vip/issues'
 license = 'GPL (>= 2)'
 imports = ['foreach', 'ggplot2 (>= 0.9.0)', 'stats', 'tibble', 'utils', 'yardstick']
 suggests = ['bookdown', 'DT', 'covr', 'doParallel', 'dplyr', 'fastshap (>= 0.1.0)', 'knitr', 'lattice', 'mlbench', 'modeldata', 'NeuralNetTools', 'pdp', 'rmarkdown', 'tinytest (>= 1.4.1)', 'varImp']
 vignettebuilder = 'knitr'
-roxygennote = '7.2.3'
+roxygennote = '7.3.3'
 encoding = 'UTF-8'
 needscompilation = 'no'
-author = 'Brandon M. Greenwell [aut, cre] (<https://orcid.org/0000-0002-8120-0084>), Brad Boehmke [aut] (<https://orcid.org/0000-0002-3611-8516>)'
+author = 'Brandon M. Greenwell [aut, cre] (ORCID: <https://orcid.org/0000-0002-8120-0084>), Brad Boehmke [aut] (ORCID: <https://orcid.org/0000-0002-3611-8516>)'
 
 [renv.packages.viridisLite]
 package = 'viridisLite'
@@ -4571,13 +4577,13 @@ author = 'Simon Garnier [aut, cre], Noam Ross [ctb, cph], Bob Rudis [ctb, cph], 
 
 [renv.packages.vroom]
 package = 'vroom'
-version = '1.6.6'
+version = '1.6.7'
 source = 'Repository'
 repository = 'CRAN'
-depends = ['R (>= 3.6)']
+depends = ['R (>= 4.1)']
 hash = ''
 title = 'Read and Write Rectangular Text Data Quickly'
-'authors@r' = 'c( person("Jim", "Hester", role = "aut", comment = c(ORCID = "0000-0002-2739-7082")), person("Hadley", "Wickham", , "hadley@posit.co", role = "aut", comment = c(ORCID = "0000-0003-4757-117X")), person("Jennifer", "Bryan", , "jenny@posit.co", role = c("aut", "cre"), comment = c(ORCID = "0000-0002-6983-2759")), person("Shelby", "Bearrows", role = "ctb"), person("https://github.com/mandreyel/", role = "cph", comment = "mio library"), person("Jukka", "Jylänki", role = "cph", comment = "grisu3 implementation"), person("Mikkel", "Jørgensen", role = "cph", comment = "grisu3 implementation"), person("Posit Software, PBC", role = c("cph", "fnd")) )'
+'authors@r' = 'c( person("Jim", "Hester", role = "aut", comment = c(ORCID = "0000-0002-2739-7082")), person("Hadley", "Wickham", , "hadley@posit.co", role = "aut", comment = c(ORCID = "0000-0003-4757-117X")), person("Jennifer", "Bryan", , "jenny@posit.co", role = c("aut", "cre"), comment = c(ORCID = "0000-0002-6983-2759")), person("Shelby", "Bearrows", role = "ctb"), person("https://github.com/mandreyel/", role = "cph", comment = "mio library"), person("Jukka", "Jylänki", role = "cph", comment = "grisu3 implementation"), person("Mikkel", "Jørgensen", role = "cph", comment = "grisu3 implementation"), person("Posit Software, PBC", role = c("cph", "fnd"), comment = c(ROR = "03wc8by49")) )'
 maintainer = 'Jennifer Bryan <jenny@posit.co>'
 description = "The goal of 'vroom' is to read and write data (like 'csv', 'tsv' and 'fwf') quickly. When reading it uses a quick initial indexing step, then reads the values lazily , so only the data you actually use needs to be read.  The writer formats the data in parallel and writes to disk asynchronously from formatting."
 url = 'https://vroom.r-lib.org, https://github.com/tidyverse/vroom'
@@ -4590,7 +4596,7 @@ vignettebuilder = 'knitr'
 roxygennote = '7.3.3'
 encoding = 'UTF-8'
 needscompilation = 'yes'
-author = 'Jim Hester [aut] (ORCID: <https://orcid.org/0000-0002-2739-7082>), Hadley Wickham [aut] (ORCID: <https://orcid.org/0000-0003-4757-117X>), Jennifer Bryan [aut, cre] (ORCID: <https://orcid.org/0000-0002-6983-2759>), Shelby Bearrows [ctb], https://github.com/mandreyel/ [cph] (mio library), Jukka Jylänki [cph] (grisu3 implementation), Mikkel Jørgensen [cph] (grisu3 implementation), Posit Software, PBC [cph, fnd]'
+author = 'Jim Hester [aut] (ORCID: <https://orcid.org/0000-0002-2739-7082>), Hadley Wickham [aut] (ORCID: <https://orcid.org/0000-0003-4757-117X>), Jennifer Bryan [aut, cre] (ORCID: <https://orcid.org/0000-0002-6983-2759>), Shelby Bearrows [ctb], https://github.com/mandreyel/ [cph] (mio library), Jukka Jylänki [cph] (grisu3 implementation), Mikkel Jørgensen [cph] (grisu3 implementation), Posit Software, PBC [cph, fnd] (ROR: <https://ror.org/03wc8by49>)'
 'config/testthat/edition' = '3'
 'config/needs/website' = 'nycflights13, tidyverse/tidytemplate'
 
@@ -4643,7 +4649,7 @@ systemrequirements = 'GNU make, OpenSSL >= 1.0.2'
 package = 'webutils'
 version = '1.2.2'
 source = 'Repository'
-repository = 'CRAN'
+repository = 'https://p3m.dev/cran/__linux__/jammy/latest'
 hash = ''
 type = 'Package'
 title = 'Utility Functions for Developing Web Applications'
@@ -4664,7 +4670,7 @@ author = 'Jeroen Ooms [aut, cre] (<https://orcid.org/0000-0002-4035-0289>)'
 package = 'whisker'
 version = '0.4.1'
 source = 'Repository'
-repository = 'CRAN'
+repository = 'RSPM'
 hash = ''
 type = 'Package'
 title = '{{mustache}} for R, Logicless Templating'
@@ -4674,6 +4680,7 @@ url = 'https://github.com/edwindj/whisker'
 license = 'GPL-3'
 suggests = ['markdown']
 roxygennote = '6.1.1'
+encoding = 'UTF-8'
 needscompilation = 'no'
 author = 'Edwin de Jonge'
 
@@ -4774,7 +4781,7 @@ author = 'Yihui Xie [aut, cre, cph] (ORCID: <https://orcid.org/0000-0003-0645-56
 
 [renv.packages.xml2]
 package = 'xml2'
-version = '1.5.0'
+version = '1.5.1'
 source = 'Repository'
 repository = 'CRAN'
 depends = ['R (>= 3.6.0)']
@@ -4818,12 +4825,13 @@ author = 'David B. Dahl [aut], David Scott [aut, cre], Charles Roosen [aut], Arn
 
 [renv.packages.yaml]
 package = 'yaml'
-version = '2.3.10'
+version = '2.3.11'
 source = 'Repository'
 repository = 'CRAN'
 hash = ''
 type = 'Package'
 title = 'Methods to Convert R Data to YAML and Back'
+'authors@r' = "c( person(\"Shawn\",    \"Garbett\",  role = c(\"cre\",\"ctb\"), email   = \"shawn.garbett@vumc.org\", comment = c(ORCID=\"0000-0003-4079-5621\") ), person(\"Jeremy\",  \"Stephens\", role = c(\"aut\", \"ctb\")), person(\"Kirill\",  \"Simonov\",  role = \"aut\"), person(\"Yihui\",   \"Xie\",      role = \"ctb\", comment = c(ORCID=\"0000-0003-0645-5666\")), person(\"Zhuoer\",  \"Dong\",     role = \"ctb\"), person(\"Hadley\",  \"Wickham\",  role = \"ctb\", comment = c(ORCID=\"0000-0003-4757-117X\")), person(\"Jeffrey\", \"Horner\",   role = \"ctb\"), person(\"reikoch\",             role = \"ctb\"), person(\"Will\",    \"Beasley\",  role = \"ctb\", comment = c(ORCID=\"0000-0002-5613-5006\")), person(\"Brendan\", \"O'Connor\", role = \"ctb\"), person(\"Michael\", \"Quinn\",    role = \"ctb\"), person(\"Charlie\", \"Gao\",      role = \"ctb\"), person(c(\"Gregory\", \"R.\"), \"Warnes\", role = \"ctb\"), person(c(\"Zhian\", \"N.\"),   \"Kamvar\", role = \"ctb\") )"
 maintainer = 'Shawn Garbett <shawn.garbett@vumc.org>'
 description = "Implements the 'libyaml' 'YAML' 1.1 parser and emitter (<https://pyyaml.org/wiki/LibYAML>) for R."
 url = 'https://github.com/vubiostat/r-yaml/'
@@ -4831,7 +4839,7 @@ bugreports = 'https://github.com/vubiostat/r-yaml/issues'
 license = 'BSD_3_clause + file LICENSE'
 suggests = ['RUnit']
 needscompilation = 'yes'
-author = "Shawn P Garbett [aut], Jeremy Stephens [aut, cre], Kirill Simonov [aut], Yihui Xie [ctb], Zhuoer Dong [ctb], Hadley Wickham [ctb], Jeffrey Horner [ctb], reikoch [ctb], Will Beasley [ctb], Brendan O'Connor [ctb], Gregory R. Warnes [ctb], Michael Quinn [ctb], Zhian N. Kamvar [ctb], Charlie Gao [ctb]"
+author = "Shawn Garbett [cre, ctb] (ORCID: <https://orcid.org/0000-0003-4079-5621>), Jeremy Stephens [aut, ctb], Kirill Simonov [aut], Yihui Xie [ctb] (ORCID: <https://orcid.org/0000-0003-0645-5666>), Zhuoer Dong [ctb], Hadley Wickham [ctb] (ORCID: <https://orcid.org/0000-0003-4757-117X>), Jeffrey Horner [ctb], reikoch [ctb], Will Beasley [ctb] (ORCID: <https://orcid.org/0000-0002-5613-5006>), Brendan O'Connor [ctb], Michael Quinn [ctb], Charlie Gao [ctb], Gregory R. Warnes [ctb], Zhian N. Kamvar [ctb]"
 
 [renv.packages.yardstick]
 package = 'yardstick'
