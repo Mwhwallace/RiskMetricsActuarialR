@@ -14,9 +14,9 @@ renv/tmp/
 # data/*.csv
 
 # Model artifacts (too large for git)
-ml/*.rds
-ml/*.png
-ml/risk_score_model/
+# ml/*.rds
+# ml/*.png
+# ml/risk_score_model/
 
 # Shiny
 rsconnect/

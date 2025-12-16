@@ -11,9 +11,9 @@ id = '69f7f46b-0a2d-4583-a5ad-70510fd0a68c'
 dashboard_url = 'https://pub.current.posit.team/connect/#/apps/69f7f46b-0a2d-4583-a5ad-70510fd0a68c'
 direct_url = 'https://pub.current.posit.team/content/69f7f46b-0a2d-4583-a5ad-70510fd0a68c/'
 logs_url = 'https://pub.current.posit.team/connect/#/apps/69f7f46b-0a2d-4583-a5ad-70510fd0a68c/logs'
-deployed_at = '2025-12-09T04:49:34Z'
-bundle_id = '9463'
-bundle_url = 'https://pub.current.posit.team/__api__/v1/content/69f7f46b-0a2d-4583-a5ad-70510fd0a68c/bundles/9463/download'
+deployed_at = '2025-12-15T14:50:50Z'
+bundle_id = '9599'
+bundle_url = 'https://pub.current.posit.team/__api__/v1/content/69f7f46b-0a2d-4583-a5ad-70510fd0a68c/bundles/9599/download'
 files = [
   '.Rprofile',
   '.posit/publish/RiskMetrics Actuarial Risk-TO1K.toml',

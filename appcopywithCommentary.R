@@ -219,7 +219,7 @@ ui <- page_navbar(
       card_header("About This Application"),
       markdown("
 ## RiskMetrics Analytics - Actuarial Risk Assessment Platform
-Designed and published by Matt Wallace, Senior Solution Architect with Posit.
+Created and published by Matt Wallace, Senior Solution Architect with Posit PBC.
 
 This interactive application demonstrates comprehensive actuarial risk assessment capabilities
 using advanced analytics and machine learning.

@@ -1,6 +1,3 @@
-# INTERACTIVE RISK ASSESSMENT APPLICATION
-# Shiny application for actuarial risk scoring and analysis
-
 library(shiny)
 library(bslib)
 library(tidyverse)
@@ -13,18 +10,12 @@ library(shinychat)
 library(ellmer)
 library(paws.common)
 
-# ==============================================================================
-# LOAD DATA AND MODEL
-# ==============================================================================
-
 risk_profiles <- read_csv("data/synthetic-risk-profiles.csv", show_col_types = FALSE)
 claims_history <- read_csv("data/synthetic-claims-history.csv", show_col_types = FALSE)
 
-# Load trained model
 model_board <- board_folder("ml")
 v_model <- vetiver_pin_read(model_board, "risk_score_model")
 
-# Brand colors
 brand_primary <- "#1e3a5f"
 brand_secondary <- "#5a6c7d"
 brand_success <- "#6b8e7f"
@@ -40,16 +31,11 @@ risk_colors <- c(
   "Very High Risk" = brand_danger
 )
 
-# ==============================================================================
-# UI
-# ==============================================================================
-
 ui <- page_navbar(
   title = "RiskMetrics Analytics",
   theme = bs_theme(version = 5) |> bs_theme_update(primary = brand_primary),
   bg = brand_primary,
 
-  # Dashboard Tab
   nav_panel(
     "Dashboard",
     layout_sidebar(
@@ -98,7 +84,6 @@ ui <- page_navbar(
     )
   ),
 
-  # Individual Assessment Tab
   nav_panel(
     "Individual Assessment",
     layout_sidebar(
@@ -158,7 +143,6 @@ ui <- page_navbar(
     )
   ),
 
-  # Claims Analysis Tab
   nav_panel(
     "Claims Analysis",
     layout_columns(
@@ -179,7 +163,6 @@ ui <- page_navbar(
     )
   ),
 
-  # Query Chat Tab
   nav_panel(
     "Query Chat",
     card(
@@ -187,7 +170,6 @@ ui <- page_navbar(
       p("Use natural language to query the risk profiles and claims data. Ask about trends, statistics, or specific insights.",
         style = "color: #5a6c7d; margin-bottom: 10px;"),
       
-      # Suggested questions
       div(
         style = "margin-bottom: 20px; padding: 15px; background: #f8f9fa; border-radius: 5px;",
         h6("Try asking:", style = "margin-bottom: 10px; color: #1e3a5f;"),
@@ -212,14 +194,13 @@ ui <- page_navbar(
     )
   ),
 
-  # About Tab
   nav_panel(
     "About",
     card(
       card_header("About This Application"),
       markdown("
 ## RiskMetrics Analytics - Actuarial Risk Assessment Platform
-Created and published by Matt Wallace, Senior Solution Architect with Posit PBC.
+Designed and published by Matt Wallace, Senior Solution Architect with Posit.
 
 This interactive application demonstrates comprehensive actuarial risk assessment capabilities
 using advanced analytics and machine learning.
@@ -254,16 +235,10 @@ All data in this application is **synthetic** and generated for demonstration pu
   )
 )
 
-# ==============================================================================
-# SERVER
-# ==============================================================================
-
 server <- function(input, output, session) {
 
-  # Initialize chat with system prompt about the data
   chat <- ellmer::chat_aws_bedrock(
     model = "us.anthropic.claude-3-5-sonnet-20241022-v2:0",
-   # region = "us-east-1",  # Specify your AWS region explicitly
     system_prompt = paste0(
       "You are a helpful actuarial data analyst assistant for RiskMetrics Analytics. ",
       "You have access to two datasets:\n\n",
@@ -288,7 +263,6 @@ server <- function(input, output, session) {
     )
   )
   
-  # Register tool for querying risk profiles
   query_risk_profiles <- function(query_type = "summary", 
                                    filter_column = NULL, 
                                    filter_value = NULL,
@@ -297,14 +271,12 @@ server <- function(input, output, session) {
     
     data <- risk_profiles
     
-    # Apply filters if specified
     if (!is.null(filter_column) && !is.null(filter_value)) {
       if (filter_column %in% names(data)) {
         data <- data |> filter(.data[[filter_column]] == filter_value)
       }
     }
     
-    # Return results based on query type
     if (query_type == "summary") {
       list(
         total_individuals = nrow(data),
@@ -328,7 +300,6 @@ server <- function(input, output, session) {
         list(error = "Invalid column names")
       }
     } else {
-      # Return sample of filtered data
       data |> 
         select(individual_id, age, gender, risk_category, overall_risk_score, 
                annual_income, credit_score) |>
@@ -350,7 +321,6 @@ server <- function(input, output, session) {
     metric = type_string("Metric column to aggregate", required = FALSE)
   ))
   
-  # Register tool for querying claims
   query_claims <- function(query_type = "summary",
                            individual_id = NULL,
                            claim_type = NULL) {
@@ -398,13 +368,11 @@ server <- function(input, output, session) {
     claim_type = type_string("Filter by claim type", required = FALSE)
   ))
   
-  # Handle chat interactions
   observeEvent(input$data_chat_user_input, {
     stream <- chat$stream_async(input$data_chat_user_input)
     chat_append("data_chat", stream)
   })
   
-  # Handle suggested question clicks
   observeEvent(input$suggest_1, {
     stream <- chat$stream_async("What's the average risk score by region?")
     chat_append("data_chat", stream)
@@ -435,7 +403,6 @@ server <- function(input, output, session) {
     chat_append("data_chat", stream)
   })
 
-  # Reactive filtered data
   filtered_data <- reactive({
     data <- risk_profiles
 
@@ -450,7 +417,6 @@ server <- function(input, output, session) {
     data
   })
 
-  # Portfolio statistics
   output$portfolio_stats <- renderUI({
     data <- filtered_data()
 
@@ -478,7 +444,6 @@ server <- function(input, output, session) {
     )
   })
 
-  # Risk distribution plot
   output$risk_distribution_plot <- renderPlotly({
     data <- filtered_data()
 
@@ -501,7 +466,6 @@ server <- function(input, output, session) {
       )
   })
 
-  # Risk dimension plot
   output$risk_dimension_plot <- renderPlotly({
     data <- filtered_data()
 
@@ -530,7 +494,6 @@ server <- function(input, output, session) {
       )
   })
 
-  # Age vs risk plot
   output$age_risk_plot <- renderPlotly({
     data <- filtered_data()
     sample_size <- min(500, nrow(data))
@@ -555,7 +518,6 @@ server <- function(input, output, session) {
       )
   })
 
-  # Risk indicators table
   output$risk_indicators_table <- renderTable({
     data <- filtered_data()
 
@@ -579,9 +541,7 @@ server <- function(input, output, session) {
     )
   })
 
-  # Individual risk calculation
   individual_risk <- eventReactive(input$calculate_risk, {
-    # Create input data frame matching model expectations
     new_data <- tibble(
       age = input$ind_age,
       gender = input$ind_gender,
@@ -623,7 +583,6 @@ server <- function(input, output, session) {
       crime_rate_area = "Moderate"
     )
 
-    # Calculate component scores (simplified)
     health_score <- (input$ind_bmi - 22) * 2 +
                    (input$ind_bp - 120) * 0.3 +
                    (input$ind_smoking == "Current") * 20 +
@@ -639,8 +598,6 @@ server <- function(input, output, session) {
 
     property_score <- 25  # Default moderate
 
-    # Calculate overall risk score as weighted average of components
-    # Using weights: Health 30%, Financial 25%, Driving 25%, Property 20%
     prediction <- (health_score * 0.30 + 
                    financial_score * 0.25 + 
                    driving_score * 0.25 + 
@@ -662,7 +619,6 @@ server <- function(input, output, session) {
     )
   })
 
-  # Risk score display
   output$risk_score_display <- renderUI({
     req(individual_risk())
     risk <- individual_risk()
@@ -699,7 +655,6 @@ server <- function(input, output, session) {
     )
   })
 
-  # Individual risk breakdown
   output$individual_risk_breakdown <- renderPlotly({
     req(individual_risk())
     risk <- individual_risk()
@@ -729,7 +684,6 @@ server <- function(input, output, session) {
       )
   })
 
-  # Similar individuals table
   output$similar_individuals_table <- renderTable({
     req(individual_risk())
     risk <- individual_risk()
@@ -747,7 +701,6 @@ server <- function(input, output, session) {
       mutate(`Risk Score` = round(`Risk Score`, 1))
   })
 
-  # Claims by type plot
   output$claims_type_plot <- renderPlotly({
     claims_summary <- claims_history |>
       group_by(claim_type, claim_status) |>
@@ -773,7 +726,6 @@ server <- function(input, output, session) {
       )
   })
 
-  # Claims vs risk plot
   output$claims_risk_plot <- renderPlotly({
     claims_per_ind <- claims_history |>
       group_by(individual_id) |>
@@ -804,7 +756,6 @@ server <- function(input, output, session) {
       )
   })
 
-  # Claims table
   output$claims_table <- DT::renderDataTable({
     claims_history |>
       arrange(desc(claim_date)) |>
@@ -819,9 +770,5 @@ server <- function(input, output, session) {
       mutate(Amount = dollar(Amount))
   }, options = list(pageLength = 10, scrollX = TRUE))
 }
-
-# ==============================================================================
-# RUN APP
-# ==============================================================================
 
 shinyApp(ui, server)

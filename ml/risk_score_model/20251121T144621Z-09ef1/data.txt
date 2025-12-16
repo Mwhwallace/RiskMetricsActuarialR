@@ -1,0 +1,17 @@
+file: risk_score_model.rds
+file_size: 966265
+pin_hash: 09ef1510ddb56bba
+type: rds
+title: 'risk_score_model: a pinned list'
+description: A lm regression modeling workflow
+tags: ~
+urls: ~
+created: 20251121T144621Z
+api_version: 1
+user:
+  required_pkgs:
+  - parsnip
+  - recipes
+  - stats
+  - workflows
+  renv_lock: ~
